@@ -1,3 +1,5 @@
+
+
 import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
@@ -29,38 +31,38 @@ export default {
 
       return state.pagination.paginationHistory.length;
     },
-    filterExchanges: state => searchedTitle => {
+    filterPapers: state => searchedTitle => {
       const { items } = state;
 
       if (!searchedTitle) { return items; }
 
-      const filteredExchanges = items.filter(item => {
+      const filteredPapers = items.filter(item => {
         return item.title &&
           item.title.toLowerCase().includes(searchedTitle.toLowerCase())
       });
 
-      return filteredExchanges;
+      return filteredPapers;
     }
   },
   actions: {
     // context -> state, commit
-    async getExchangeBySlug({commit}, slug) {
-      commit("setExchange", {});
+    async getPapersBySlug({commit}, slug) {
+      commit("setPaper", {});
       const docQuery = query(
-        collection(db, "exchanges"),
+        collection(db, "papers"),
         where("slug", "==", slug)
       );
 
       const querySnap = await getDocs(docQuery);
-      const exchange = querySnap.docs[0].data();
-      exchange.id = querySnap.docs[0].id;
+      const paper = querySnap.docs[0].data();
+      paper.id = querySnap.docs[0].id;
 
-      const userSnap = await getDoc(exchange.user);
-      exchange.user = userSnap.data();
-      exchange.user.id = userSnap.id;
-      commit("setExchange", exchange);
+      const userSnap = await getDoc(paper.user);
+      paper.user = userSnap.data();
+      paper.user.id = userSnap.id;
+      commit("setPaper", paper);
     },
-    async getMoreExchanges({commit, state}, {page}) {
+    async getMorePapers({commit, state}, {page}) {
       let queryData;
 
       if (state.pagination.isFetchingData) { return; }
@@ -68,7 +70,7 @@ export default {
 
       if (page === "next") {
         queryData = query(
-          collection(db, "exchanges"),
+          collection(db, "papers"),
           startAfter(state.pagination.lastItem),
           limit(state.pagination.itemCount)
         )
@@ -83,7 +85,7 @@ export default {
 
         state.pagination.paginationHistory.splice(lastItemIndex, 1);
         queryData = query(
-          collection(db, "exchanges"),
+          collection(db, "papers"),
           startAt(previousItem),
           limit(state.pagination.itemCount)
         )
@@ -93,29 +95,29 @@ export default {
       commit("setIsFetchingData", false);
       if (snapshot.docs.length === 0) { return; }
 
-      const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
-      commit("setExchanges", exchanges);
+      const papers = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      commit("setPapers", papers);
       commit("setLastItem", snapshot.docs[snapshot.docs.length - 1]);
 
       if (page === "next") {
         commit("setPaginationHistory", snapshot.docs[0]);
       }
     },
-    async getExchanges({commit, state}) {
+    async getPapers({commit, state}) {
       commit("resetPagination");
 
-      const exchangeQuery = query(
-        collection(db, "exchanges"),
+      const paperQuery = query(
+        collection(db, "papers"),
         limit(state.pagination.itemCount)
       );
-      const snapshot = await getDocs(exchangeQuery);
-      const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      const snapshot = await getDocs(paperQuery);
+      const papers = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
-      commit("setExchanges", exchanges);
+      commit("setPapers", papers);
       commit("setLastItem", snapshot.docs[snapshot.docs.length - 1]);
       commit("setPaginationHistory", snapshot.docs[0]);
     },
-    async createExchange({rootState, dispatch}, { data, onSuccess }) {
+    async createPaper({rootState, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", rootState.user.data.id);
       data.user = userRef;
       data.slug = slugify(`${data.title} ${Date.now()}`, {
@@ -124,18 +126,18 @@ export default {
       })
       data.createdAt = Timestamp.fromDate(new Date());
 
-      await addDoc(collection(db, "exchanges"), data);
+      await addDoc(collection(db, "papers"), data);
 
-      dispatch("toast/success", "Exchange was created succesfuly!", {root: true});
+      dispatch("toast/success", "Paper was created succesfuly!", {root: true});
       onSuccess();
     }
   },
   mutations: {
-    setExchanges(state, exchanges) {
-      state.items = exchanges;
+    setPapers(state, papers) {
+      state.items = papers;
     },
-    setExchange(state, exchange) {
-      state.item = exchange;
+    setPaper(state, paper) {
+      state.item = paper;
     },
     setLastItem(state, item) {
       state.pagination.lastItem = item;
