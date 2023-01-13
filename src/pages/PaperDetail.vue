@@ -7,8 +7,8 @@
       <div class="hero-body">
         <div class="hero-img"></div>
         <div class="container">
-          <div class="columns">
-            <div class="column is-9">
+          <div style="padding-top: 10px;" class="columns">
+            <div class="column is-100">
               <h1 class="title">
                 {{exchange.title}}
               </h1>
@@ -25,63 +25,11 @@
                     >
                   </figure>
                 </div>
-                <div class="user-tile-author center">
+                <div class="user-tile-author left">
                   <h3 class="user-tile-author-name">by {{exchangeUser.username}}</h3>
                 </div>
               </div>
               <!-- Exchange User End -->
-            </div>
-            <div class="column is-3">
-              <div class="column-right">
-                <div class="card ">
-                  <div class="card-image">
-                    <figure class="image is-4by2">
-                      <!-- Exchange Image -->
-                      <img
-                        :src="exchange.image"
-                        alt="Placeholder image"
-                      >
-                    </figure>
-                  </div>
-                  <div class="card-content">
-                    <div class="content m-b-sm">
-                      <div class="media-content">
-                        <span class="title is-2">${{exchange.price}}
-                        </span>
-                      </div>
-                    </div>
-                    <exchange-deal-modal
-                      v-if="canCreateExchange"
-                      :exchange="exchange"
-                      :availableExchanges="userExchanges"
-                    />
-                    <button
-                     v-if="isExchangeOwner"
-                     disabled
-                     class="button is-fullwidth is-large is-danger is-outlined"
-                    >
-                      Yours Exchange
-                    </button>
-                    <router-link
-                      v-if="!isAuth"
-                      to="/login"
-                      class="button is-fullwidth is-large is-success is-outlined"
-                    >
-                      Login to make an offer
-                    </router-link>
-                    <div class="content">
-                      <ul class="m-t-none">
-                        <li>
-                          Get item today
-                        </li>
-                        <li>
-                          Learn more
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -96,14 +44,16 @@
               <div class="more-details-title">
                 Details
               </div>
-              <div class="more-details-item">Country: {{exchange.country}}</div>
-              <div class="more-details-item">City: {{exchange.city}}</div>
-            </div>
-          </div>
-          <div class="section product-description p-t-none">
-            <div class="product-description-title">Exchange Info</div>
-            <div class="product-description-details">
-              <p>{{exchange.description}}</p>
+              <div class="more-details-item">Title: {{exchange.title}}</div>
+              <div class="more-details-item">Auhtor: {{exchange.author}}</div>
+              <div class="more-details-item">Year: {{exchange.year}}</div>
+              <div class="more-details-item">CitationKey: {{exchange.citationkey}}</div>
+              <div class="more-details-item">Book Title: {{exchange.booktitle}}</div>
+              <div class="more-details-item">Journal: {{exchange.journal}}</div>
+              <div class="more-details-item">URL: {{exchange.url}}</div>
+              <div class="more-details-item">DOI: {{exchange.doi}}</div>
+              <div class="more-details-item">Date: {{exchange.date}}</div>
+              <div class="more-details-item">Description: {{exchange.description}}</div>
             </div>
           </div>
         </div>
@@ -112,10 +62,9 @@
   </div>
 </template>
 <script>
-import ExchangeDealModal from "../components/ExchangeDealModal.vue";
+
 export default {
   components: {
-    ExchangeDealModal
   },
   created() {
     const { slug } = this.$route.params;
@@ -204,8 +153,8 @@ export default {
     background: linear-gradient(#29303B,#29303B,#29303B);
   }
   .title {
-    font-weight: bold;
-    font-size: 45px;
+    font-weight: normals;
+    font-size: 25px;
   }
   .subtitle {
     /*font-weight: bold;*/

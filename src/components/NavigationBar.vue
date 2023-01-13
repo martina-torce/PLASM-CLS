@@ -7,7 +7,7 @@
     >
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: navbarColors[$route.path] }" href="/">
+          <a class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: 'white' }" href="/">
             {{title}}
           </a>
           <span
@@ -45,12 +45,6 @@
                 to="/library"
                 class="navbar-item">
                 Library
-              </router-link>
-              <router-link 
-                :style="{ color: navbarColors[$route.path] }"
-                to="/library/new"
-                class="navbar-item">
-                Add Paper
               </router-link>
               <router-link
                 :style="{ color: navbarColors[$route.path] }"

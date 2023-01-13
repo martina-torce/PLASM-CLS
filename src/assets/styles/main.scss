@@ -95,6 +95,7 @@ a {
       .navbar-item {
         font-weight: $weight-semibold;
         text-transform: uppercase;
+        color: $white;
 
         &:focus {
           background-color: transparent;
@@ -107,16 +108,22 @@ a {
       }
 
       &.is-active {
-        .navbar-item { color: $dark; }
+        .navbar-item { color: $white; }
       }
     }
   }
 }
 
-.title {
+.BigTitle {
   margin-bottom: calc($spacing/2);
   font-weight: $font-weight-extra-bold!important;
   font-size: 70px;
+}
+
+.title {
+  margin-bottom: calc($spacing/2);
+  font-weight: $font-weight-extra-bold!important;
+  font-size: 25px;
 }
 
 .subtitle {

@@ -3,10 +3,10 @@
       <library-hero
         :onSearch="filterExchanges"
       />
-      <exchangle-list
+      <library-list
         :exchanges="exchanges"
       />
-      <exchange-pagination
+      <library-pagination
         :onNextPage="getMoreExchanges"
         :isFetching="isFetchingMoreData"
         :page="currentPage"
@@ -15,14 +15,14 @@
   </template>
   
   <script>
-  import ExchangleList from "../components/ExchangleList.vue";
-  import ExchangePagination from "../components/ExchangePagination.vue";
+  import LibraryList from "../components/LibraryList.vue";
+  import LibraryPagination from "../components/LibraryPagination.vue";
   import LibraryHero from "../components/LibraryHero.vue";
   
   export default {
     components: {
-      ExchangleList,
-      ExchangePagination,
+      LibraryList,
+      LibraryPagination,
       LibraryHero
     },
     data() {
