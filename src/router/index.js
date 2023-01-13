@@ -9,6 +9,7 @@ import ProfilePage from "../pages/ProfilePage";
 import PaperAddPage from "../pages/PaperAdd";
 import PaperDetailPage from "../pages/PaperDetail";
 import LibraryPage from "../pages/LibraryPage";
+import myProjectPage from "../pages/myProjectPage.vue"
 
 import { getAuth } from "firebase/auth";
 
@@ -52,6 +53,12 @@ const routes = [
     name: "Register",
     component: RegisterPage,
     meta: { onlyGuestUser: true }
+  },
+  {
+    path:"/projects",
+    name: "MyProjects",
+    component: myProjectPage,
+    meta: {onlyAuthUser: true}
   }
 ]
 

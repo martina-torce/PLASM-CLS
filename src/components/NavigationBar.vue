@@ -46,6 +46,12 @@
                 class="navbar-item">
                 Library
               </router-link>
+              <router-link
+                :style="{ color: navbarColors[$route.path] }"
+                to="/projects"
+                class="navbar-item">
+                My Projects
+              </router-link>
               <router-link 
                 :style="{ color: navbarColors[$route.path] }"
                 to="/library/new"
@@ -78,6 +84,7 @@
                 class="navbar-item">
                 Register
               </router-link>
+              
             </template>
           </div>
         </div>
@@ -109,6 +116,8 @@ export default {
         '/library/new': 'white',
         '/login': 'white',
         '/register': 'white',
+        '/projects': 'white',
+
       },
     }
   },
