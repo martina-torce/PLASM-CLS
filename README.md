@@ -1,4 +1,4 @@
-# exchangario
+# PLASM Collaborative Literature Storage
 
 ## Project setup
 ```
