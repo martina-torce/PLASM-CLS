@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <exchange-navbar
+    <navigation-bar
       :title="brandName"
       :items="menuItems"
     />
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import ExchangeNavbar from "./components/ExchangeNavbar.vue";
+import NavigationBar from "./components/NavigationBar.vue";
 export default {
   name: 'App',
   components: {
-    ExchangeNavbar
+    NavigationBar
   },
   data() {
     return {

@@ -6,9 +6,9 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
-import ExchangeCreatePage from "../pages/ExchangeCreate";
-import ExchangeDetailPage from "../pages/ExchangeDetail";
-import ExchangePage from "../pages/ExchangePage";
+import PaperAddPage from "../pages/PaperAdd";
+import PaperDetailPage from "../pages/PaperDetail";
+import LibraryPage from "../pages/LibraryPage";
 
 import { getAuth } from "firebase/auth";
 
@@ -19,21 +19,21 @@ const routes = [
     component: HomePage
   },
   {
-    path: "/exchanges",
-    name: "Exchange",
-    component: ExchangePage,
+    path: "/library",
+    name: "Library",
+    component: LibraryPage,
     meta: { onlyAuthUser: true }
   },
   {
-    path: "/exchanges/new",
-    name: "ExchangeCreate",
-    component: ExchangeCreatePage,
+    path: "/library/new",
+    name: "PaperAdd",
+    component: PaperAddPage,
     meta: { onlyAuthUser: true }
   },
   {
-    path: "/exchanges/:slug",
-    name: "ExchangeDetail",
-    component: ExchangeDetailPage,
+    path: "/library/:slug",
+    name: "PaperDetail",
+    component: PaperDetailPage,
   },
   {
     path: "/profile",

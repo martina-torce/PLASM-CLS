@@ -1,16 +1,16 @@
 <template>
   <div id="exchangario">
-    <exchange-hero/>
+    <home-hero/>
   </div>
 </template>
 
 <script>
 
-import ExchangeHero from "../components/ExchangeHero.vue";
+import HomeHero from "../components/HomeHero.vue";
 
 export default {
   components: {
-    ExchangeHero
+    HomeHero
   },
 }
 </script>

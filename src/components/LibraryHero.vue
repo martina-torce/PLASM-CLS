@@ -1,15 +1,11 @@
 <template>
   <div class="hero-section">
-    <section class="hero background-img is-large" :style="{ 'background-image': 'url(https://images.unsplash.com/photo-1517457210348-703079e57d4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)' }">
-      <!-- Hero content: will be in the middle -->
+    <section class="hero background-img is-medium" :style="{ 'background-image': 'url(https://source.unsplash.com/-9C3TMXwQjQ/1600x400)' }">
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title is-size-1 has-text-white">
-            Let's Exchange!
+            Your Library
           </h1>
-          <h2 class="subtitle has-text-light">
-            Products and Services we can exchange together
-          </h2>
         </div>
       </div>
     </section>
@@ -18,17 +14,14 @@
         <div class="level">
           <div class="level-left">
             <div class="level-item">
-              <span>Search For</span>
+              <span>Search for</span>
             </div>
             <div class="level-item">
               <input
                 @input="handleSearch"
                 type="text"
                 class="input"
-                placeholder="Driller">
-            </div>
-            <div class="level-item">
-              <span v-if="searchedValue">Searching "{{searchedValue}}"</span>
+                placeholder="Paper title">
             </div>
           </div>
         </div>
