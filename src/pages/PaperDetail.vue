@@ -29,6 +29,7 @@
                   <h3 class="user-tile-author-name">by {{exchangeUser.username}}</h3>
                 </div>
               </div>
+
               <!-- Exchange User End -->
             </div>
             <div class="column is-3">
@@ -109,13 +110,28 @@
         </div>
       </div>
     </div>
+    <div class="container">
+      <!-- add this -->
+      <div class="comment-space">
+        <p>Comment (1)</p>
+      </div>
+      <div>
+        <user-comment class="message" />
+      </div>
+      <add-comment />
+    </div>
   </div>
 </template>
+
 <script>
 import ExchangeDealModal from "../components/ExchangeDealModal.vue";
+import AddComment from "../components/AddComment.vue";
+import UserComment from "../components/UserComment.vue"
 export default {
   components: {
-    ExchangeDealModal
+    ExchangeDealModal,
+    AddComment,
+    UserComment
   },
   created() {
     const { slug } = this.$route.params;
