@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+  	function isLoggedIn() {
+    	return request.auth.uid != null;
+    }
+
+    match /users/{userId} {
+    	allow read: if isLoggedIn();
+      allow create: if
+      	isLoggedIn() && request.auth.uid == request.resource.data.id;
+      allow update: if
+      	isLoggedIn() && request.auth.uid == resource.data.id;
+    }
+
+    match /exchanges/{exchangeId} {
+    	allow read: if true;
+      allow write: if
+      	isLoggedIn() &&
+        request.resource.data.title is string &&
+        request.resource.data.title.size() > 10 &&
+        request.resource.data.description is string &&
+        request.resource.data.image is string &&
+        request.resource.data.price is number &&
+        request.resource.data.price > 0 &&
+        request.resource.data.country is string &&
+        request.resource.data.city is string;
+    }
+
+    match /opportunities/{opportunityId} {
+    	allow read: if isLoggedIn();
+      allow create: if isLoggedIn();
+      allow update: if isLoggedIn() &&
+       (request.resource.data.status == "accepted" || request.resource.data.status == "declined") &&
+       resource.data.toUser == path("/databases/(default)/documents/users/" + request.auth.uid);
+    }
+  }
+}
