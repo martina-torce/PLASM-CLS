@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ExchangeNavbar from "./components/Navbar.vue";
+import ExchangeNavbar from "./components/ExchangeNavbar.vue";
 export default {
   name: 'App',
   components: {

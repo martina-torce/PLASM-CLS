@@ -2,12 +2,12 @@
 
 import { createWebHistory, createRouter } from "vue-router";
 
-import HomePage from "../pages/Home";
-import AboutPage from "../pages/About";
-import FaqPage from "../pages/Faq";
-import LoginPage from "../pages/Login";
-import RegisterPage from "../pages/Register";
-import ProfilePage from "../pages/Profile";
+import HomePage from "../pages/HomePage";
+import AboutPage from "../pages/AboutPage";
+import FaqPage from "../pages/FaqPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import ProfilePage from "../pages/ProfilePage";
 import ExchangeCreatePage from "../pages/ExchangeCreate";
 import ExchangeDetailPage from "../pages/ExchangeDetail";
 
