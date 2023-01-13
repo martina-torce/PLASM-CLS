@@ -56,7 +56,7 @@
                       :availableExchanges="userExchanges"
                     />
                     <button
-                     v-if="isExchangeOwner"
+                     v-if="isPaperOwner"
                      disabled
                      class="button is-fullwidth is-large is-danger is-outlined"
                     >
@@ -137,11 +137,11 @@ export default {
     userExchanges() {
       return this.user?.exchanges || [];
     },
-    isExchangeOwner() {
-      return this.$store.getters["user/isExchangeOwner"](this.exchangeUser.id);
+    isPaperOwner() {
+      return this.$store.getters["user/isPaperOwner"](this.exchangeUser.id);
     },
     canCreateExchange() {
-      return this.isAuth && !this.isExchangeOwner
+      return this.isAuth && !this.isPaperOwner
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <section class="posts">
     <div class="container">
-      <div class="posts-type">Latest Posts</div>
+      <div class="posts-type">Latest papers</div>
       <div class="columns is-multiline">
         <div
           v-for="exchange in exchanges"
