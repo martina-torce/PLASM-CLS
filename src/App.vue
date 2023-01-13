@@ -1,6 +1,4 @@
 
-
-
 <template>
   <div>
     <exchange-navbar
@@ -20,11 +18,9 @@ export default {
   },
   data() {
     return {
-      brandName: "Exchangario",
+      brandName: "PLASM",
       menuItems: [
         { text: "Home", link: "/" },
-        { text: "About", link: "/about" },
-        { text: "Faq", link: "/faq" }
       ],
     }
   }
