@@ -3,13 +3,12 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutPage";
-import FaqPage from "../pages/FaqPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
 import ExchangeCreatePage from "../pages/ExchangeCreate";
 import ExchangeDetailPage from "../pages/ExchangeDetail";
+import ExchangePage from "../pages/ExchangePage";
 
 import { getAuth } from "firebase/auth";
 
@@ -20,14 +19,10 @@ const routes = [
     component: HomePage
   },
   {
-    path: "/about",
-    name: "About",
-    component: AboutPage
-  },
-  {
-    path: "/faq",
-    name: "Faq",
-    component: FaqPage
+    path: "/exchanges",
+    name: "Exchange",
+    component: ExchangePage,
+    meta: { onlyAuthUser: true }
   },
   {
     path: "/exchanges/new",

@@ -7,14 +7,14 @@
     >
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item has-text-white is-size-2 has-text-weight-bold" href="#">
+          <a class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: navbarColors[$route.path] }" href="/">
             {{title}}
           </a>
           <span
             @click="isMenuOpen = !isMenuOpen"
             :class="{'is-active': isMenuOpen}"
             role="button" tabindex="0"
-            class="navbar-burger burger has-text-white"
+            class="navbar-burger burger has-text-dark"
             data-target="navbar-menu"
           >
             <span></span>
@@ -27,11 +27,12 @@
           :class="{'is-active': isMenuOpen}"
           class="navbar-menu"
         >
-          <div class="navbar-end">
-            <div v-if="isAuthenticated" class="navbar-item">
+          <div class="navbar-end" >
+            <div  :style="{ color: navbarColors[$route.path] }" v-if="isAuthenticated"  class="navbar-item" >
               {{user.email}}
             </div>
             <router-link
+              :style="{ color: navbarColors[$route.path] }"
               v-for="item in items"
               :key="item.text"
               :to="item.link"
@@ -39,17 +40,26 @@
               {{item.text}}
             </router-link>
             <template v-if="isAuthenticated">
-              <router-link
+              <router-link 
+                :style="{ color: navbarColors[$route.path] }"
+                to="/exchanges"
+                class="navbar-item">
+                Library
+              </router-link>
+              <router-link 
+                :style="{ color: navbarColors[$route.path] }"
                 to="/exchanges/new"
                 class="navbar-item">
                 New Exchange
               </router-link>
               <router-link
+                :style="{ color: navbarColors[$route.path] }"
                 to="/profile"
                 class="navbar-item">
                 Profile
               </router-link>
               <div
+                :style="{ color: navbarColors[$route.path] }"
                 @click="() => $store.dispatch('user/logout')"
                 class="navbar-item clickable">
                 Logout
@@ -57,11 +67,13 @@
             </template>
             <template v-else>
               <router-link
+                :style="{ color: navbarColors[$route.path] }"
                 to="/login"
                 class="navbar-item">
                 Login
               </router-link>
               <router-link
+                :style="{ color: navbarColors[$route.path] }"
                 to="/register"
                 class="navbar-item">
                 Register
@@ -80,7 +92,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Exchangario",
+      default: "Plasm",
     },
     items: {
       type: Array,
@@ -89,7 +101,24 @@ export default {
   },
   data() {
     return {
-      isMenuOpen: false
+      isMenuOpen: false,
+      navbarColors: {
+        '/': 'black',
+        '/profile': 'white',
+        '/exchanges': 'white',
+        '/exchanges/new': 'white',
+        '/login': 'white',
+        '/register': 'white',
+      },
+    }
+  },
+  watch: {
+    '$route': function(to) {
+      if (to.name === '/') {
+        this.color = 'black';
+      } else {
+        this.color = 'white';
+      }
     }
   },
   setup() {
@@ -108,6 +137,6 @@ export default {
       }
     }
   }
+  
 }
 </script>
-
