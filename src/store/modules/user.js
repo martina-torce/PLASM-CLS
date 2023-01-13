@@ -25,10 +25,10 @@ export default {
     isAuthenticated(state) {
       return !!state.data;
     },
-    isExchangeOwner: state => exchangeUserId => (
+    isPaperOwner: state => paperUserId => (
       state.data &&
-      exchangeUserId &&
-      state.data.id === exchangeUserId
+      paperUserId &&
+      state.data.id === paperUserId
     )
   },
   actions: {
