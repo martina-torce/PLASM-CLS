@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import ExchangeModal from '@/components/Modal'
+import ExchangeModal from '@/components/ModalComponent'
 export default {
   components: {
     ExchangeModal

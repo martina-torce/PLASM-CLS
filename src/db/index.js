@@ -2,14 +2,16 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.VUE_APP_API_KEY,
-  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
-  projectId: process.env.VUE_APP_PROJECT_ID,
-  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.VUE_APP_SENDER_ID,
-  appId: process.env.VUE_APP_APP_ID
+  apiKey: "AIzaSyB-D5Ga7uEgylGebV7VLjzJszFZfVOMafI",
+  authDomain: "plasm-cls.firebaseapp.com",
+  databaseURL: "https://plasm-cls-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "plasm-cls",
+  storageBucket: "plasm-cls.appspot.com",
+  messagingSenderId: "58519493427",
+  appId: "1:58519493427:web:377e2ad3246927e61dfc46",
+  measurementId: "G-Z4KZ67KF9V"
 };
 
+// Initialize Firebase
 initializeApp(firebaseConfig);
 export const db = getFirestore();
-

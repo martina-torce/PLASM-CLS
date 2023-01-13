@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import ExchangeModal from "./Modal.vue";
+import ExchangeModal from "./ModalComponent.vue";
 export default {
   components: {
     ExchangeModal
