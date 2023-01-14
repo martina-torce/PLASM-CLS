@@ -1,3 +1,4 @@
+<!--Displays home page of website-->
 <template>
   <div id="exchangario">
     <home-hero/>
