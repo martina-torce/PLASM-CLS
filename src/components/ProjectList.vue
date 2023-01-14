@@ -7,7 +7,7 @@
       <div class="posts-type">Posts</div>
       <div class="row is-multiline">
         <div
-          v-for="project in projects"
+          v-for="project in myProjects"
           :key="project.id"
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
@@ -27,6 +27,10 @@ export default {
     projects: {
       type: Array,
       required: true,
+    },
+    myProjects:{
+      type: Array,
+      required: true
     }
   }
 }

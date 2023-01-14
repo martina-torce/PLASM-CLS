@@ -2,6 +2,7 @@
     <div id="PLasm-CLS">
       <project-list
         :projects="projects"
+        :myProjects = "userProjects"
       />
       <project-pagination
         :onNextPage="getMoreProjects"
@@ -26,9 +27,17 @@
       }
     },
     computed: {
-      projects() {
-        console.log();
-        return this.$store.getters["project/filterProjects"](this.searchedProjectTitle);
+      user(){
+        return this.$store.state.user.data;
+      },
+      project(){
+        return this.$store.state.project.item;
+      },
+      projectMembers(){
+        return this.project.user;
+      },
+      userProjects() {
+        return this.user?.projects|| [];
       },
       isFetchingMoreData() {
         return this.$store.state.project.pagination.isFetchingData

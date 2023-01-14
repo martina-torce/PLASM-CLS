@@ -29,6 +29,11 @@ export default {
       state.data &&
       paperUserId &&
       state.data.id === paperUserId
+    ),
+    isProjectMember: state => projectUserId =>(
+      state.data&&
+      projectUserId &&
+      state.data.id === projectUserId
     )
   },
   actions: {
@@ -64,8 +69,8 @@ export default {
     async updateProfile({commit, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", data.id);
 
-      if (data.exchanges) {
-        delete data.exchanges;
+      if (data.projects) {
+        delete data.projects;
       }
 
       await updateDoc(userRef, data);
@@ -79,20 +84,21 @@ export default {
       const userProfile = docSnap.data();
 
       const docQuery = query(
-        collection(db, "exchanges"),
+        collection(db, "projects"),
         where("user", "==", docRef)
       );
 
       const querySnap = await getDocs(docQuery);
-      const exchanges = querySnap.docs.map(
+      const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
+      debugger
 
       const useWithProfile = {
         id: user.uid,
         email: user.email,
         ...userProfile,
-        exchanges
+        projects
       }
 
       commit("setUser", useWithProfile);
@@ -108,7 +114,7 @@ export default {
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
           credit: 0,
-          exchanges: []
+          projects: []
         })
       } catch(e) {
         commit("setAuthError", e.message);
