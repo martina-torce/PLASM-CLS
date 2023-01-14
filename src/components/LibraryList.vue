@@ -1,13 +1,16 @@
 <template>
-  <section class="posts">
+  <!-- Create the List of papers from the paper database in Firestore  -->
+  <section class="list">
     <div class="container">
-      <div class="posts-type">Posts</div>
+      <div class="list-type">List of papers :</div>
       <div class="row is-multiline">
+        <!-- Loops inside the papers from the paper database  -->
         <div
           v-for="paper in papers"
           :key="paper.id"
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
+            <!-- Loops inside the tags from papers and display them -->
             <div class="item-tags">
               <a
                 v-for="tag in paper.tags"
@@ -17,22 +20,20 @@
                 #{{tag}}
               </a>
             </div>
+            <!-- When pressed on the title, change the route-view to the specicific paper detail -->
             <router-link
               :to="{name: 'PaperDetail', params: {slug: paper.slug}}"
               class="item-link"
             >
+              <!-- Display the paper title -->
               <h2
                 class="title item-title is-size-4 has-text-weight-extra-bold">
                 <a class="item-link" href="#">{{paper.title}}</a>
               </h2>
             </router-link>
-            <div class="level">
-              <div class="level-left">
-                <div class="item-author">{{paper.type}}</div>
-              </div>
-              <div class="level-right">
+            <!-- Display the date the paper was added -->
+            <div class="level-right">
                 {{paper.createdAt.toDate().toDateString()}}
-              </div>
             </div>
           </div>
         </div>
@@ -40,6 +41,7 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
   props: {
@@ -52,22 +54,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .posts {
+  .list {
     padding-top: 70px;
   }
-  .posts-type {
+  .list-type {
     font-size: 34px;
     margin-bottom: 10px;
     font-weight: bold;
   }
-
-  .paper-icon {
-    color: #ffbc8c;
-    height: 25px;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
 </style>

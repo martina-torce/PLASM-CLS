@@ -1,3 +1,4 @@
+<!--Displays Project list and Pagination-->
 <template>
     <div id="PLasm-CLS">
       <project-list
@@ -11,7 +12,8 @@
       />
     </div>
   </template>
-  
+ 
+ 
   <script>
   import ProjectList from "../components/ProjectList.vue";
   import ProjectPagination from "../components/ProjectPagination.vue";
@@ -21,7 +23,7 @@
       ProjectList,
       ProjectPagination,
     },
-    data() {
+    data() {        //Filters projects based on Title 
       return {
         searchedProjectTitle: ""
       }

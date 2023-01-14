@@ -1,3 +1,4 @@
+<!--Displays Library Page for inputted papers-->
 <template>
     <div id="Plasm-CLS">
       <library-hero
@@ -45,6 +46,7 @@
     created() {
       this.$store.dispatch("paper/getPapers");
     },
+    // Method created responsible for retrieving more papers from the database and filtering papers based on inputed search value 
     methods: {
       getMorePapers({page}) {
         this.$store.dispatch("paper/getMorePapers", {page});

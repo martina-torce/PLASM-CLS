@@ -1,4 +1,5 @@
   <template>
+    <!-- Creating the Search component for the library page -->
     <div class="search-lookup-wrap">
       <div class="search-lookup centered">
         <div class="level">
@@ -6,20 +7,19 @@
             <div class="level-item">
               <span>Search For</span>
             </div>
+            <!-- Add the input space to allow user to search -->
             <div class="level-item">
               <input
                 @input="handleSearch"
                 type="text"
                 class="input"
-                placeholder="Driller">
-            </div>
-            <div class="level-item">
-              <span v-if="searchedValue">Searching "{{searchedValue}}"</span>
+                placeholder="Tags">
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Create the "Add Paper" button to the page to allow to add new paper (will redirect you to AddPaperPage) -->
     <div class="add-paper-button">
       <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link>
     </div>
@@ -34,11 +34,13 @@
         required: true
       }
     },
+    // Set the search value to an empty string
     data() {
       return {
         searchedValue: ""
       }
     },
+    // Create the method to allow the research to find the paper tags/name
     methods: {
       handleSearch(e) {
         const { value } = e.target;
@@ -51,10 +53,6 @@
 
 
   <style scoped lang="scss">
-    .hero-section {
-      position: relative;
-      display: inline;
-    }
 
     .search-lookup {
       width: 550px;
@@ -74,65 +72,12 @@
     @media only screen and (max-width: 769px) {
       .search-lookup-wrap {
         position: inherit;
-        bottom: unset;
+        bottom: -80px;
       }
       .search-lookup {
         width: 100%;
         border-radius: 0px;
-      }
-    }
-
-    .search-card-find {
-      width: 100%;
-      height: 180px;
-      position: relative;
-      border-radius: 3px;
-      text-decoration: none;
-      box-shadow: 0 0 1px rgba(0,0,0,.05);
-      background-clip: content-box;
-      background-size: cover;
-      background-position: 50% 20%;
-      border: 1px solid rgba(0,0,0,.12);
-      -webkit-tap-highlight-color: transparent;
-      &-interest {
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        > p {
-          font-weight: bold;
-        }
-      }
-      .title {
-        color: white;
-      }
-      .subtitle {
-        color: white;
-      }
-      &-content {
-        &-date {
-          margin: 10px;
-          width: 70px;
-          text-align: center;
-          border-radius: 50%;
-          .day {
-            font-size: 21px;
-            color: white;
-            font-weight: bold;
-          }
-          .month {
-            color: #ff5050;
-            font-weight: bold;
-            font-size: 23px;
-            margin-bottom: -5px;
-          }
-        }
-        &-info {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          padding: 15px;
-          width: 100%;
-        }
+        bottom: unset;
       }
     }
     .add-paper-button {
@@ -147,5 +92,12 @@
       text-align: center;
       display: inline-block;
       font-size: 16px;
+    }
+
+    @media only screen and (max-width: 769px) {
+      .add-paper-button {
+        position: inherit;
+        bottom: unset;
+      }
     }
   </style>

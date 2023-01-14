@@ -1,12 +1,13 @@
-
 <template>
   <div>
+    <!-- Creates the Modal for "update info" in the profile page -->
     <template v-if="$slots.activator">
       <div @click="open">
         <slot
           name="activator" />
       </div>
     </template>
+    <!-- Open modal when pressed -->
     <button
       v-else
       @click="open"
@@ -29,6 +30,7 @@
           <template v-if="$slots.footerButtons">
             <slot name="footerButtons"/>
           </template>
+          <!-- Save the changes to the profile -->
           <button
             v-else
             @click="submitModal"

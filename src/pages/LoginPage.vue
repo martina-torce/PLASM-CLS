@@ -1,3 +1,4 @@
+<!--Login form displayed to allow access for aunthorized users-->
 <template>
   <div class="page-wrapper">
     <div class="container has-text-centered">
@@ -48,6 +49,8 @@
     </div>
   </div>
 </template>
+
+<!--Defines behaviour of login form-->
 <script>
 import useAuth from '../composition/useAuth';
 import useVuelidate from '@vuelidate/core'
@@ -56,7 +59,7 @@ import FormErrors from "../components/FormErrors.vue";
 
 export default {
   components: {
-    FormErrors
+    FormErrors   //Error message displayed if login is unsuccessful 
   },
   data() {
     return {
@@ -66,6 +69,7 @@ export default {
       }
     }
   },
+  // Ensures valid email address is used
   validations() {
     return {
       form: {
@@ -74,6 +78,7 @@ export default {
       }
     }
   },
+  //Provides authentication and validation methods 
   setup() {
     return {
       ...useAuth(),
@@ -85,6 +90,7 @@ export default {
       if (isAuth) { this.$router.push("/"); }
     }
   },
+  // Method validates form fields inputted and redirects user to homepage if login is successful 
   methods: {
     async login() {
       const isValid = await this.v$.$validate();
@@ -96,6 +102,7 @@ export default {
 }
 </script>
 
+<!--CSS style of login form-->
 <style scoped>
   .hero.is-success {
     background: #F2F6FA;

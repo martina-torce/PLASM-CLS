@@ -1,7 +1,9 @@
+  <!-- Creating the Project Pagination to divide list of papers into smaller segements/ pages --> 
 <template>
     <nav class="pagination is-rounded  is-centered" role="navigation" aria-label="pagination">
       <ul class="pagination-list">
         <li>
+          <!-- Multiple pages created to display remaining list of papers stored -->
           <button
             @click="() => onNextPage({page: 'previous'})"
             :disabled="isFetching"
@@ -24,6 +26,7 @@
     </nav>
   </template>
   
+  <!--Props used in template to ensure ProjectPagination works as intended - Page displays current page number, handling pagination and loading spinner for the next page-->
   <script>
   export default {
     props: {

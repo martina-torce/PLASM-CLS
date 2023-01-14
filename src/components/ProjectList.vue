@@ -1,10 +1,12 @@
 <template>
-    <div class="add-project-button">
-      <router-link to="/projects/new" class="round-button" style="color: white">Create Project</router-link>
-    </div>
-    <section class="posts">
+  <!-- Create the Add project button to get redirected to the ProjectCreate Page  -->
+  <div class="add-project-button">
+    <router-link to="/projects/new" class="round-button" style="color: white">Create Project</router-link>
+  </div>
+  <!-- Create the List of projects from the project database in Firestore  -->
+  <section class="list">
     <div class="container">
-      <div class="posts-type">Posts</div>
+      <div class="list-type">Projects :</div>
       <div class="row is-multiline">
         <div
           v-for="project in myProjects"
@@ -37,35 +39,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .posts {
+  .list {
     padding-top: 70px;
   }
-  .posts-type {
+  .list-type {
     font-size: 34px;
     margin-bottom: 10px;
     font-weight: bold;
   }
-
-  .project-icon {
-    color: #ffbc8c;
-    height: 25px;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .add-project-button {
+    right: 75px;
+    top: 100px;
+    position: absolute;
+    z-index: 999;
+    background-color:hsl(0deg, 0%, 29%);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
   }
-    .add-project-button {
-      right: 75px;
-      top: 100px;
-      position: absolute;
-      z-index: 999;
-      background-color:hsl(0deg, 0%, 29%);
-      border: none;
-      padding: 10px 22px;
-      border-radius: 12px;
-      text-align: center;
-      display: inline-block;
-      font-size: 16px;
-    }
   </style>
   

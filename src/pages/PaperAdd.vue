@@ -1,7 +1,9 @@
+<!-- This page allows users to add a new paper -->
 <template>
   <div class="page-wrapper">
     <div class="container">
       <div class="form-container">
+        <!-- This form contains all the manually-inputted reference information about a paper -->
         <form>
           <div class="field">
             <label class="label">Title*</label>
@@ -49,7 +51,6 @@
               <form-errors :errors="v$.form.citationkey.$errors" />
             </div>
           </div>
-
           <!-- TODO: provide tags inputs -->
           <div class="field">
             <label class="label">Tags*</label>
@@ -146,7 +147,6 @@
               <form-errors :errors="v$.form.description.$errors" />
             </div>
           </div>
-
           <div class="field is-grouped">
             <div class="control">
               <button
@@ -193,6 +193,7 @@ export default {
       form: setupInitialData()
     }
   },
+  // makes sure each field is entered correctly
   validations() {
     return {
       form: {
@@ -215,6 +216,7 @@ export default {
   setup () {
     return { v$: useVuelidate() }
   },
+  // validates the form, if it's valid it dispatches an action to the store with the form data and reset the validation state
   methods: {
     async createPaper() {
       const isValid = await this.v$.$validate();
@@ -229,6 +231,7 @@ export default {
         })
       }
     },
+    // adds a tag to the form's tags property if valid and resets input value
     handleTags(event) {
       const { value } = event.target;
 

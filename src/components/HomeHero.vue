@@ -1,4 +1,5 @@
 <template>
+    <!-- Creating the Hero component for the Home page -->
     <div class="hero-section">
       <section class="background">
           <div class="center">

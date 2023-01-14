@@ -1,11 +1,14 @@
 
 <template>
+  <!-- The Navigation bar at the top of the screen -->
   <header class="header">
+    <!-- Define navigation path  -->
     <nav
       class="navbar"
       :class="$route.path === '/' ? '' : 'with-background'"
     >
       <div class="container">
+        <!-- Create the title on the left  -->
         <div class="navbar-brand">
           <router-link class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: 'white' }" to="/">
             {{title}}
@@ -27,10 +30,12 @@
           :class="{'is-active': isMenuOpen}"
           class="navbar-menu"
         >
+          <!-- Show email adress if the user is logged in  -->
           <div class="navbar-end" >
             <div  :style="{ color: navbarColors[$route.path] }" v-if="isAuthenticated"  class="navbar-item" >
               {{user.email}}
             </div>
+            <!-- Create Home component and redirect to homepage if pressed  -->
             <router-link
               :style="{ color: navbarColors[$route.path] }"
               v-for="item in items"
@@ -39,6 +44,7 @@
               class="navbar-item nav-web">
               {{item.text}}
             </router-link>
+            <!-- Show library component if user is logged in and redirect to libreary page if pressed -->
             <template v-if="isAuthenticated">
               <router-link 
                 :style="{ color: navbarColors[$route.path] }"
@@ -46,18 +52,21 @@
                 class="navbar-item">
                 Library
               </router-link>
+              <!-- Show My Project component if user is logged in and redirect to My project Page page if pressed -->
               <router-link 
                 :style="{ color: navbarColors[$route.path] }"
                 to="/projects"
                 class="navbar-item">
                 My Projects
               </router-link>
+              <!-- Show Profile component if user is logged in and redirect to Profile Page page if pressed -->
               <router-link
                 :style="{ color: navbarColors[$route.path] }"
                 to="/profile"
                 class="navbar-item">
                 Profile
               </router-link>
+              <!-- Show Logout component if user is logged in and logout + redirect to home page if it is pressed -->
               <router-link
                 :style="{ color: navbarColors[$route.path] }"
                 to="/"
@@ -66,6 +75,7 @@
                 Logout
               </router-link>
             </template>
+            <!-- Show Login component and redirect to login page if it is pressed -->
             <template v-else>
               <router-link
                 :style="{ color: navbarColors[$route.path] }"
@@ -73,6 +83,7 @@
                 class="navbar-item">
                 Login
               </router-link>
+              <!-- Show Register component and redirect to Register page if it is pressed -->
               <router-link
                 :style="{ color: navbarColors[$route.path] }"
                 to="/register"
@@ -99,7 +110,8 @@ export default {
       type: Array,
       required: true,
     }
-  },
+  },  
+  // Make the color of the component change depending on what page we are
   data() {
     return {
       isMenuOpen: false,
@@ -115,15 +127,6 @@ export default {
       },
     }
   },
-  watch: {
-    '$route': function(to) {
-      if (to.name === '/') {
-        this.color = 'black';
-      } else {
-        this.color = 'white';
-      }
-    }
-  },
   setup() {
     return useAuth();
   },
@@ -133,6 +136,7 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.handleWindowResizing);
   },
+  // method when the size of the window decreases, reduce the nav bar to a menu that can be pressed
   methods: {
     handleWindowResizing(e) {
       if (this.isMenuOpen && e.target.innerWidth > 1020) {
