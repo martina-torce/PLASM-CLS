@@ -110,9 +110,9 @@ export default {
       type: Array,
       required: true,
     }
-  },
-  data() {
+  },  
   // Make the color of the component change depending on what page we are
+  data() {
     return {
       isMenuOpen: false,
       navbarColors: {
@@ -136,7 +136,7 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.handleWindowResizing);
   },
-  // method when the size of the window decreases, reduce the nav bar to a menu that cna be pressed
+  // method when the size of the window decreases, reduce the nav bar to a menu that can be pressed
   methods: {
     handleWindowResizing(e) {
       if (this.isMenuOpen && e.target.innerWidth > 1020) {

@@ -1,8 +1,11 @@
+<!-- This page allows the user to create a new shared database -->
 <template>
+  <!-- Creates a form containing information about the project -->
   <div class="page-wrapper">
     <div class="container">
       <div class="form-container">
         <form>
+          <!-- Field where user can input project title -->
           <div class="field">
             <label class="label">Title*</label>
             <div class="control">
@@ -15,6 +18,7 @@
               <form-errors :errors="v$.form.title.$errors" />
             </div>
           </div>
+          <!-- Field where user can input collaborators -->
           <div class="field">
             <label class="label">Other Users you would like to Invite ? (Each time you want to add another user press space)</label>
             <div class="control">
@@ -34,6 +38,7 @@
               </div>
             </div>
           </div>
+          <!-- Buttons to Submit or Cancel -->
           <div class="field is-grouped">
             <div class="control">
               <button
@@ -51,81 +56,84 @@
   </div>
 </template>
   
-  <script>
-  import useVuelidate from '@vuelidate/core'
-  import { required, helpers } from '@vuelidate/validators'
-  import FormErrors from "../components/FormErrors.vue";
+<script>
+import useVuelidate from '@vuelidate/core'
+import { required, helpers } from '@vuelidate/validators'
+import FormErrors from "../components/FormErrors.vue";
+
+const setupInitialData = () => ({
+  title: "",
+  users: [],
+})
   
-  const setupInitialData = () => ({
-    title: "",
-    users: [],
-  })
-  
-  export default {
-    components: {
-      FormErrors
-    },
-    data() {
-      return {
-        form: setupInitialData()
-      }
-    },
-    validations() {
-      return {
-        form: {
-          title: {
-            required: helpers.withMessage("Title cannot by empty!", required),
-          },
-          invitedUsers: { required:false }
-        }
-      }
-    },
-    setup () {
-      return { v$: useVuelidate() }
-    },
-    methods: {
-      async createProject() {
-        const isValid = await this.v$.$validate();
-  
-        if (isValid) {
-          this.v$.$reset();
-          this.$store.dispatch("project/createProject", {
-            data: this.form,
-            onSuccess: () => {
-              this.form = setupInitialData();
-            }
-          })
-        }
-      },
-      handleUsers(event) {
-        const { value } = event.target;
-  
-        if (
-          value &&
-          value.trim().length > 1 &&
-          (value.substr(-1) === "," || value.substr(-1) === " ")) {
-  
-          const _value = value.split(",")[0].trim();
-  
-          if (!this.form.users.includes(_value)) {
-            this.form.users.push(_value);
-          }
-  
-          event.target.value = "";
-        }
+export default {
+  components: {
+    FormErrors
+  },
+  data() {
+    return {
+      form: setupInitialData()
+    }
+  },
+  // helps ensure the fields are entered correctly
+  validations() {
+    return {
+      form: {
+        title: {
+          required: helpers.withMessage("Title cannot by empty!", required),
+        },
+        invitedUsers: { required:false }
       }
     }
+  },
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  // if the fields are entered correctly it dispatches project information to store and reset fields
+  methods: {
+    async createProject() {
+      const isValid = await this.v$.$validate();
+
+      if (isValid) {
+        this.v$.$reset();
+        this.$store.dispatch("project/createProject", {
+          data: this.form,
+          onSuccess: () => {
+            this.form = setupInitialData();
+          }
+        })
+      }
+    },
+    // checks if input is valid and adds the value to the form's users property and reset field
+    handleUsers(event) {
+      const { value } = event.target;
+
+      if (
+        value &&
+        value.trim().length > 1 &&
+        (value.substr(-1) === "," || value.substr(-1) === " ")) {
+
+        const _value = value.split(",")[0].trim();
+
+        if (!this.form.users.includes(_value)) {
+          this.form.users.push(_value);
+        }
+
+        event.target.value = "";
+        }
+      }
+    } 
   }
-  </script>
+</script>
   
-  <style scoped>
-  .form-container {
-    max-width: 960px;
-    margin: 0 auto;
-    margin-top: 40px;
-  }
-  .user {
-    margin: 3px;
-  }
-  </style>
+<style scoped>
+.form-container {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.user {
+  margin: 3px;
+}
+</style>
   

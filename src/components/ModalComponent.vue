@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <!-- Creates the Modal for "update info" in the profile page -->

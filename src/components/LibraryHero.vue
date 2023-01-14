@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <!-- Create the "Add Paper" buttonto the page to allow to add new paper (willredirect you to AddPaperPage) -->
+    <!-- Create the "Add Paper" button to the page to allow to add new paper (will redirect you to AddPaperPage) -->
     <div class="add-paper-button">
       <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link>
     </div>
@@ -34,7 +34,7 @@
         required: true
       }
     },
-    // Set the reserachvalue to an empty string
+    // Set the search value to an empty string
     data() {
       return {
         searchedValue: ""
