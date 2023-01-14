@@ -7,36 +7,14 @@
       <div class="posts-type">Posts</div>
       <div class="row is-multiline">
         <div
-          v-for="paper in papers"
-          :key="paper.id"
+          v-for="project in projects"
+          :key="project.id"
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
-            <div class="item-tags">
-              <a
-                v-for="tag in paper.tags"
-                :key="tag"
-                class="button is-rounded"
-                href="#">
-                #{{tag}}
-              </a>
-            </div>
-            <router-link
-              :to="{name: 'PaperDetail', params: {slug: paper.slug}}"
-              class="item-link"
-            >
               <h2
                 class="title item-title is-size-4 has-text-weight-extra-bold">
-                <a class="item-link" href="#">{{paper.title}}</a>
+                <a class="item-link" href="#">{{project.title}}</a>
               </h2>
-            </router-link>
-            <div class="level">
-              <div class="level-left">
-                <div class="item-author">{{paper.type}}</div>
-              </div>
-              <div class="level-right">
-                {{paper.createdAt.toDate().toDateString()}}
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -46,7 +24,7 @@
 <script>
 export default {
   props: {
-    papers: {
+    projects: {
       type: Array,
       required: true,
     }
@@ -64,7 +42,7 @@ export default {
     font-weight: bold;
   }
 
-  .paper-icon {
+  .project-icon {
     color: #ffbc8c;
     height: 25px;
     width: 25px;

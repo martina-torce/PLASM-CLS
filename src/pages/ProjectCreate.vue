@@ -7,24 +7,31 @@
             <label class="label">Title*</label>
             <div class="control">
               <input
-                v-model="form.projectTitle"
+                v-model="form.title"
                 class="input"
                 type="text"
                 placeholder="Title of the project"
               />
-              <form-errors :errors="v$.form.projectTitle.$errors" />
+              <form-errors :errors="v$.form.title.$errors" />
             </div>
           </div>
           <div class="field">
-            <label class="label">Other Users (email)</label>
+            <label class="label">Other Users you would like to Invite ? (Each time you want to add another user press space)</label>
             <div class="control">
               <input
-                v-model="form.authUsers"
+                v-model="form.invitedUsers"
+                @input="handleUsers"
                 class="input"
-                type="text"
-                placeholder="Emails (CSV)"
-              />
-              <form-errors :errors="v$.form.authUsers.$errors" />
+                type="ref"
+                placeholder="Email (CSV)">
+              <div
+                v-for="user in form.users"
+                :key="user"
+                class="user is-primary is-medium"
+              >
+              <form-errors :errors="v$.form.invitedUsers.$errors" />
+                {{user}}
+              </div>
             </div>
           </div>
           <div class="field is-grouped">
@@ -35,7 +42,7 @@
                 class="button is-link">Submit</button>
             </div>
             <div class="control">
-              <button class="button is-text">Cancel</button>
+              <router-link to="/projects" class="button is-text">Cancel</router-link>
             </div>
           </div>
         </form>
@@ -50,8 +57,8 @@
   import FormErrors from "../components/FormErrors.vue";
   
   const setupInitialData = () => ({
-    projectTitle: "",
-    authUsers: ""
+    title: "",
+    users: [],
   })
   
   export default {
@@ -66,10 +73,10 @@
     validations() {
       return {
         form: {
-          projectTitle: {
+          title: {
             required: helpers.withMessage("Title cannot by empty!", required),
           },
-          authUsers: { required:false }
+          invitedUsers: { required:false }
         }
       }
     },
@@ -90,7 +97,7 @@
           })
         }
       },
-      handleTags(event) {
+      handleUsers(event) {
         const { value } = event.target;
   
         if (
@@ -100,8 +107,8 @@
   
           const _value = value.split(",")[0].trim();
   
-          if (!this.form.tags.includes(_value)) {
-            this.form.tags.push(_value);
+          if (!this.form.users.includes(_value)) {
+            this.form.users.push(_value);
           }
   
           event.target.value = "";
@@ -117,7 +124,7 @@
     margin: 0 auto;
     margin-top: 40px;
   }
-  .tag {
+  .user {
     margin: 3px;
   }
   </style>

@@ -130,7 +130,7 @@
               <input
                 v-model="form.date"
                 class="input"
-                type="number"
+                type="text"
                 placeholder="date of publishment">
               <form-errors :errors="v$.form.date.$errors" />
             </div>
@@ -155,7 +155,7 @@
                 class="button is-link">Submit</button>
             </div>
             <div class="control">
-              <button class="button is-text">Cancel</button>
+              <router-link to="/library" class="button is-text">Cancel</router-link>
             </div>
           </div>
         </form>

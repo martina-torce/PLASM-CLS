@@ -1,10 +1,10 @@
 <template>
     <div id="PLasm-CLS">
       <project-list
-        :papers="papers"
+        :projects="projects"
       />
       <project-pagination
-        :onNextPage="getMorePapers"
+        :onNextPage="getMoreProjects"
         :isFetching="isFetchingMoreData"
         :page="currentPage"
       />
@@ -22,30 +22,30 @@
     },
     data() {
       return {
-        searchedPaperTitle: ""
+        searchedProjectTitle: ""
       }
     },
     computed: {
-      papers() {
+      projects() {
         console.log();
-        return this.$store.getters["paper/filterPapers"](this.searchedPaperTitle);
+        return this.$store.getters["project/filterProjects"](this.searchedProjectTitle);
       },
       isFetchingMoreData() {
-        return this.$store.state.paper.pagination.isFetchingData
+        return this.$store.state.project.pagination.isFetchingData
       },
       currentPage() {
-        return this.$store.getters["paper/currentPage"];
+        return this.$store.getters["project/currentPage"];
       }
     },
     created() {
-      this.$store.dispatch("paper/getPapers");
+      this.$store.dispatch("project/getProjects");
     },
     methods: {
-      getMorePapers({page}) {
-        this.$store.dispatch("paper/getMorePapers", {page});
+      getMoreProjects({page}) {
+        this.$store.dispatch("project/getMoreProjects", {page});
       },
-      filterPapers(searchValue) {
-        this.searchedPaperTitle = searchValue;
+      filterProjects(searchValue) {
+        this.searchedProjectTitle = searchValue;
       }
     }
   }
