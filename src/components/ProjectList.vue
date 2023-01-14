@@ -1,5 +1,8 @@
 <template>
-  <section class="posts">
+    <div class="add-project-button">
+      <router-link to="/projects/new" class="round-button" style="color: white">Create Project</router-link>
+    </div>
+    <section class="posts">
     <div class="container">
       <div class="posts-type">Posts</div>
       <div class="row is-multiline">
@@ -69,5 +72,18 @@ export default {
     align-items: center;
     justify-content: center;
   }
-
-</style>
+    .add-project-button {
+      right: 75px;
+      top: 100px;
+      position: absolute;
+      z-index: 999;
+      background-color:hsl(0deg, 0%, 29%);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 12px;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+    }
+  </style>
+  

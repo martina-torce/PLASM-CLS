@@ -1,12 +1,9 @@
 <template>
-    <div id="Plasm-CLS">
-      <library-hero
-        :onSearch="filterPapers"
-      />
-      <library-list
+    <div id="PLasm-CLS">
+      <project-list
         :papers="papers"
       />
-      <library-pagination
+      <project-pagination
         :onNextPage="getMorePapers"
         :isFetching="isFetchingMoreData"
         :page="currentPage"
@@ -15,15 +12,13 @@
   </template>
   
   <script>
-  import LibraryList from "../components/LibraryList.vue";
-  import LibraryPagination from "../components/LibraryPagination.vue";
-  import LibraryHero from "../components/LibraryHero.vue";
-  
+  import ProjectList from "../components/ProjectList.vue";
+  import ProjectPagination from "../components/ProjectPagination.vue";
+
   export default {
     components: {
-      LibraryList,
-      LibraryPagination,
-      LibraryHero
+      ProjectList,
+      ProjectPagination,
     },
     data() {
       return {

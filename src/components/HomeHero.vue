@@ -2,7 +2,7 @@
     <div class="hero-section">
       <section class="background">
           <div class="center">
-            <h1 class="title has-text-dark vertical-center">
+            <h1 class="BigTitle has-text-dark vertical-center">
               Collaborative Literature Storage
             </h1>
             <h2 class="subtitle has-text-dark vertical-center">
