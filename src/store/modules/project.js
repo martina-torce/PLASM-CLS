@@ -26,7 +26,7 @@ export default {
     }
   },
   getters: {
-    currentPage(state) {
+    currentProject(state) {
       if (!state.pagination.paginationHistory) { return 1; }
 
       return state.pagination.paginationHistory.length;
@@ -37,8 +37,8 @@ export default {
       if (!searchedTitle) { return items; }
 
       const filteredProjects = items.filter(item => {
-        return item.title &&
-          item.title.toLowerCase().includes(searchedTitle.toLowerCase())
+        return item.projectTitle &&
+          item.projectTitle.toLowerCase().includes(searchedTitle.toLowerCase())
       });
 
       return filteredProjects;
@@ -57,9 +57,9 @@ export default {
       const project = querySnap.docs[0].data();
       project.id = querySnap.docs[0].id;
 
-      const userSnap = await getDoc(project.user);
-      project.user = userSnap.data();
-      project.user.id = userSnap.id;
+      const userSnap = await getDoc(project.authUser);
+      project.authUser = userSnap.data();
+      project.authUser.id = userSnap.id;
       commit("setProject", project);
     },
     async getMoreProjects({commit, state}, {page}) {

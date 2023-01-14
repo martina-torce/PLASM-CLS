@@ -1,20 +1,62 @@
 <template>
-  <div></div>
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="form-container">
+        <form>
+          <div class="field">
+            <label class="label">Title*</label>
+            <div class="control">
+              <input
+                v-model="form.projectTitle"
+                class="input"
+                type="text"
+                placeholder="Title of the project"
+              />
+              <form-errors :errors="v$.form.projectTitle.$errors" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Other Users (email)</label>
+            <div class="control">
+              <input
+                v-model="form.authUsers"
+                class="input"
+                type="text"
+                placeholder="Emails (CSV)"
+              />
+              <form-errors :errors="v$.form.authUsers.$errors" />
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button
+                type="button"
+                @click="createProject"
+                class="button is-link">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-text">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
   
   <script>
   import useVuelidate from '@vuelidate/core'
   import { required, helpers } from '@vuelidate/validators'
-  //import FormErrors from "../components/FormErrors.vue";
+  import FormErrors from "../components/FormErrors.vue";
   
   const setupInitialData = () => ({
     projectTitle: "",
-    authUsers: [""]
+    authUsers: ""
   })
   
   export default {
     components: {
-      //FormErrors
+      FormErrors
     },
     data() {
       return {
