@@ -1,10 +1,30 @@
-<!-- This page allows users to add a new paper -->
 <template>
   <div class="page-wrapper">
     <div class="container">
       <div class="form-container">
-        <!-- This form contains all the manually-inputted reference information about a paper -->
         <form>
+          <div class="field">
+            <label class="label">Type*</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="form.type">
+                  <option value="book">Book</option>
+                  <option value="arcticle">Article</option>
+                  <option value="booktlet">Booklet</option>
+                  <option value="inbook">Inbook</option>
+                  <option value="incollection">Incollection</option>
+                  <option value="inproceedings">Inproceedings</option>
+                  <option value="manual">Manual</option>
+                  <option value="mastersthesis">Masters Thesis</option>
+                  <option value="misc">Misc</option>
+                  <option value="phdthesis">Phd Thesis</option>
+                  <option value="proceedings">Proceedings</option>
+                  <option value="techreport">Techreport</option>
+                  <option value="unpublished">Unpublished</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <div class="field">
             <label class="label">Title*</label>
             <div class="control">
@@ -51,6 +71,7 @@
               <form-errors :errors="v$.form.citationkey.$errors" />
             </div>
           </div>
+
           <!-- TODO: provide tags inputs -->
           <div class="field">
             <label class="label">Tags*</label>
@@ -147,6 +168,7 @@
               <form-errors :errors="v$.form.description.$errors" />
             </div>
           </div>
+
           <div class="field is-grouped">
             <div class="control">
               <button
@@ -170,6 +192,7 @@ import { required, helpers } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
 
 const setupInitialData = () => ({
+  type: "book",
   title: "",
   author: "",
   year: "",
@@ -193,10 +216,12 @@ export default {
       form: setupInitialData()
     }
   },
-  // makes sure each field is entered correctly
   validations() {
     return {
       form: {
+        type: {
+          required: helpers.withMessage("Type cannot by empty!", required),
+        },
         title: {
           required: helpers.withMessage("Title cannot by empty!", required),
         },
@@ -216,7 +241,6 @@ export default {
   setup () {
     return { v$: useVuelidate() }
   },
-  // validates the form, if it's valid it dispatches an action to the store with the form data and reset the validation state
   methods: {
     async createPaper() {
       const isValid = await this.v$.$validate();
@@ -231,7 +255,6 @@ export default {
         })
       }
     },
-    // adds a tag to the form's tags property if valid and resets input value
     handleTags(event) {
       const { value } = event.target;
 

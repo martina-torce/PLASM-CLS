@@ -14,9 +14,6 @@
               <h1 class="title">
                 {{paper.title}}
               </h1>
-              <h2 class="subtitle">
-                {{paper.type}}
-              </h2>
                 <!-- Display user who added paper -->
                 <div v-if="!!paperUser" class="user-tile">
                 <div class="user-tile-image">
