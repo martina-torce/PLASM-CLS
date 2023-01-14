@@ -1,19 +1,23 @@
 <template>
-  <exchange-modal
+  <!-- Create the components of the profile modal -->
+  <update-modal
     ref="exchangeModal"
     :onModalSubmit="updateProfile"
   >
     <form>
+      <!-- Username component of the modal -->
       <div class="field">
         <label class="title">Username</label>
         <input
           v-model="userProfile.username"
           class="input">
       </div>
+      <!-- Avatar component of the modal -->
       <div class="field">
         <label class="title">Avatar</label>
         <div class="file has-name">
           <label class="file-label">
+            <!-- When pressed, will upload image to Firecloud storage instead of Firestore -->
             <input
               @change="handleUpload"
               class="file-input"
@@ -26,12 +30,14 @@
                   icon="upload"
                 />
               </span>
+              <!-- Can browse file to choose for an image -->
               <span class="file-label">
                 Choose a file…
               </span>
             </span>
           </label>
         </div>
+        <!-- Show progress bar of uploading the Avatar photo -->
         <progress
           class="progress"
           :value="progress"
@@ -45,24 +51,28 @@
           :src="userProfile.avatar"
         />
       </div>
+      <!-- User info component of the modal -->
       <div class="field">
         <label class="title">Info about user</label>
         <input
           v-model="userProfile.info"
           class="input">
       </div>
+      <!-- Adress of user component of the modal -->
       <div class="field">
         <label class="title">Address</label>
         <input
           v-model="userProfile.address"
           class="input">
       </div>
+      <!-- Country of user component of the modal -->
       <div class="field">
         <label class="title">Country</label>
         <input
           v-model="userProfile.country"
           class="input">
       </div>
+      <!-- Phone number of user component of the modal -->
       <div class="field">
         <label class="title">Phone</label>
         <input
@@ -71,20 +81,22 @@
       </div>
     </form>
 
+    <!-- When pressed update the info about the profile -->
     <template #activator>
       <button class="button is-block is-primary is-light is-fullwidth">
         Update Profile
       </button>
     </template>
 
-  </exchange-modal>
+  </update-modal>
 </template>
 
 <script>
-  import ExchangeModal from "./ModalComponent.vue";
+// Import he modal component
+  import UpdateModal from "./ModalComponent.vue";
   export default {
     components: {
-      ExchangeModal
+      UpdateModal
     },
     props: {
       user: {
@@ -92,6 +104,7 @@
         required: true
       }
     },
+    // user = user loged in
     data () {
       return {
         userProfile: { ...this.user },
@@ -104,12 +117,14 @@
       }
     },
     methods: {
+      // Updates the changes to firestore in user collection
       updateProfile() {
         this.$store.dispatch("user/updateProfile", {
           data: this.userProfile,
           onSuccess: () => this.modal.close()
         })
       },
+      // Create the upload method to upload images for profile picture
       handleUpload(e) {
         const self = this;
         const file = e.target.files[0];

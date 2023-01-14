@@ -1,4 +1,5 @@
 <template>
+    <!-- Creating the "Add comment" feature to The paper Detail page -->
     <div class="form">
       <form>
         <div class="form__group">

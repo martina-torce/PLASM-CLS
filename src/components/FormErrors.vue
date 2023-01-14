@@ -1,4 +1,6 @@
+
 <template>
+  <!-- Creating the error message if an error happens -->
   <div
     v-for="error of errors"
     :key="error.$uid"
