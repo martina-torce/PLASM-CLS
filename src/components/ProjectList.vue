@@ -13,10 +13,15 @@
           :key="project.id"
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
-              <h2
+            <router-link
+              :to="{name: 'ProjectLibrary', params: {slug: project.slug}}"
+              class="item-link"
+            >  
+            <h2
                 class="title item-title is-size-4 has-text-weight-extra-bold">
                 <a class="item-link" href="#">{{project.title}}</a>
               </h2>
+            </router-link>
           </div>
         </div>
       </div>

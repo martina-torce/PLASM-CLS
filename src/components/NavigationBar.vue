@@ -44,14 +44,8 @@
               class="navbar-item nav-web">
               {{item.text}}
             </router-link>
-            <!-- Show library component if user is logged in and redirect to libreary page if pressed -->
+
             <template v-if="isAuthenticated">
-              <router-link 
-                :style="{ color: navbarColors[$route.path] }"
-                to="/library"
-                class="navbar-item">
-                Library
-              </router-link>
               <!-- Show My Project component if user is logged in and redirect to My project Page page if pressed -->
               <router-link 
                 :style="{ color: navbarColors[$route.path] }"

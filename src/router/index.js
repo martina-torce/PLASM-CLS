@@ -21,8 +21,8 @@ const routes = [
     component: HomePage
   },
   {
-    path: "/library",
-    name: "Library",
+    path: "/project/:slug/library/",
+    name: "ProjectLibrary",
     component: LibraryPage,
     meta: { onlyAuthUser: true }
   },
@@ -33,7 +33,7 @@ const routes = [
     meta: { onlyAuthUser: true }
   },
   {
-    path: "/library/:slug",
+    path: "/project/:slug/library/:slug",
     name: "PaperDetail",
     component: PaperDetailPage,
     meta: { onlyAuthUser: true }
