@@ -1,85 +1,31 @@
 <template>
   <div
-    v-if="exchange && exchange.slug"
+    v-if="paper && paper.slug"
     class="page-wrapper">
     <section
       class="hero is-black">
       <div class="hero-body">
         <div class="hero-img"></div>
         <div class="container">
-          <div class="columns">
-            <div class="column is-9">
+          <div style="padding-top: 10px;" class="columns">
+            <div class="column is-100">
               <h1 class="title">
-                {{exchange.title}}
+                {{paper.title}}
               </h1>
               <h2 class="subtitle">
-                {{exchange.type}}
+                {{paper.type}}
               </h2>
-              <!-- Exchange User Start -->
-              <div v-if="!!exchangeUser" class="user-tile">
+              <div v-if="!!paperUser" class="user-tile">
                 <div class="user-tile-image">
                   <figure class="image is-64x64">
                     <img
                       class="is-rounded"
-                      :src="exchangeUser.avatar"
+                      :src="paperUser.avatar"
                     >
                   </figure>
                 </div>
-                <div class="user-tile-author center">
-                  <h3 class="user-tile-author-name">by {{exchangeUser.username}}</h3>
-                </div>
-              </div>
-              <!-- Exchange User End -->
-            </div>
-            <div class="column is-3">
-              <div class="column-right">
-                <div class="card ">
-                  <div class="card-image">
-                    <figure class="image is-4by2">
-                      <!-- Exchange Image -->
-                      <img
-                        :src="exchange.image"
-                        alt="Placeholder image"
-                      >
-                    </figure>
-                  </div>
-                  <div class="card-content">
-                    <div class="content m-b-sm">
-                      <div class="media-content">
-                        <span class="title is-2">${{exchange.price}}
-                        </span>
-                      </div>
-                    </div>
-                    <exchange-deal-modal
-                      v-if="canCreateExchange"
-                      :exchange="exchange"
-                      :availableExchanges="userExchanges"
-                    />
-                    <button
-                     v-if="isPaperOwner"
-                     disabled
-                     class="button is-fullwidth is-large is-danger is-outlined"
-                    >
-                      Yours Exchange
-                    </button>
-                    <router-link
-                      v-if="!isAuth"
-                      to="/login"
-                      class="button is-fullwidth is-large is-success is-outlined"
-                    >
-                      Login to make an offer
-                    </router-link>
-                    <div class="content">
-                      <ul class="m-t-none">
-                        <li>
-                          Get item today
-                        </li>
-                        <li>
-                          Learn more
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                <div class="user-tile-author left">
+                  <h3 class="user-tile-author-name">by {{paperUser.username}}</h3>
                 </div>
               </div>
             </div>
@@ -87,7 +33,6 @@
         </div>
       </div>
     </section>
-    <!-- HEADER -->
     <div class="container">
       <div class="columns">
         <div class="column is-9">
@@ -96,30 +41,46 @@
               <div class="more-details-title">
                 Details
               </div>
-              <div class="more-details-item">Country: {{exchange.country}}</div>
-              <div class="more-details-item">City: {{exchange.city}}</div>
-            </div>
-          </div>
-          <div class="section product-description p-t-none">
-            <div class="product-description-title">Exchange Info</div>
-            <div class="product-description-details">
-              <p>{{exchange.description}}</p>
+              <div class="more-details-item">Title: {{paper.title}}</div>
+              <div class="more-details-item">Auhtor: {{paper.author}}</div>
+              <div class="more-details-item">Year: {{paper.year}}</div>
+              <div class="more-details-item">CitationKey: {{paper.citationkey}}</div>
+              <div class="more-details-item">Book Title: {{paper.booktitle}}</div>
+              <div class="more-details-item">Journal: {{paper.journal}}</div>
+              <div class="more-details-item">URL: {{paper.url}}</div>
+              <div class="more-details-item">DOI: {{paper.doi}}</div>
+              <div class="more-details-item">Date: {{paper.date}}</div>
+              <div class="more-details-item">Description: {{paper.description}}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="comment-space">
+        <p>Comment (1)</p>
+      </div>
+      <div>
+        <user-comment class="message" />
+      </div>
+      <add-comment />
+    </div>
   </div>
 </template>
+
+
 <script>
-import ExchangeDealModal from "../components/ExchangeDealModal.vue";
+import AddComment from "../components/AddComment.vue";
+import UserComment from "../components/UserComment.vue"
+
 export default {
   components: {
-    ExchangeDealModal
+    AddComment,
+    UserComment
   },
   created() {
     const { slug } = this.$route.params;
-    this.$store.dispatch("exchange/getExchangeBySlug", slug);
+    this.$store.dispatch("paper/getPapersBySlug", slug);
   },
   computed: {
     user() {
@@ -128,19 +89,19 @@ export default {
     isAuth() {
       return this.$store.getters["user/isAuthenticated"];
     },
-    exchange() {
-      return this.$store.state.exchange.item;
+    paper() {
+      return this.$store.state.paper.item;
     },
-    exchangeUser() {
-      return this.exchange.user;
+    paperUser() {
+      return this.paper.user;
     },
-    userExchanges() {
-      return this.user?.exchanges || [];
+    userPapers() {
+      return this.user?.papers || [];
     },
     isPaperOwner() {
-      return this.$store.getters["user/isPaperOwner"](this.exchangeUser.id);
+      return this.$store.getters["user/isPaperOwner"](this.paperUser.id);
     },
-    canCreateExchange() {
+    canCreatePaper() {
       return this.isAuth && !this.isPaperOwner
     }
   }
@@ -204,8 +165,8 @@ export default {
     background: linear-gradient(#29303B,#29303B,#29303B);
   }
   .title {
-    font-weight: bold;
-    font-size: 45px;
+    font-weight: normals;
+    font-size: 25px;
   }
   .subtitle {
     /*font-weight: bold;*/

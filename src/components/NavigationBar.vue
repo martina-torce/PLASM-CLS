@@ -7,9 +7,9 @@
     >
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: navbarColors[$route.path] }" href="/">
+          <router-link class="navbar-item is-size-2 has-text-weight-bold" :style="{ color: 'white' }" to="/">
             {{title}}
-          </a>
+          </router-link>
           <span
             @click="isMenuOpen = !isMenuOpen"
             :class="{'is-active': isMenuOpen}"
@@ -48,9 +48,9 @@
               </router-link>
               <router-link 
                 :style="{ color: navbarColors[$route.path] }"
-                to="/library/new"
+                to="/projects"
                 class="navbar-item">
-                Add Paper
+                My Projects
               </router-link>
               <router-link
                 :style="{ color: navbarColors[$route.path] }"
@@ -58,12 +58,13 @@
                 class="navbar-item">
                 Profile
               </router-link>
-              <div
+              <router-link
                 :style="{ color: navbarColors[$route.path] }"
+                to="/"
                 @click="() => $store.dispatch('user/logout')"
-                class="navbar-item clickable">
+                class="navbar-item clickable" >
                 Logout
-              </div>
+              </router-link>
             </template>
             <template v-else>
               <router-link
@@ -109,6 +110,8 @@ export default {
         '/library/new': 'white',
         '/login': 'white',
         '/register': 'white',
+        '/library/:slug': 'white',
+        '/project': 'white',
       },
     }
   },

@@ -1,13 +1,13 @@
 <template>
-    <div id="exchangario">
+    <div id="Plasm-CLS">
       <library-hero
-        :onSearch="filterExchanges"
+        :onSearch="filterPapers"
       />
       <library-list
-        :exchanges="exchanges"
+        :papers="papers"
       />
       <library-pagination
-        :onNextPage="getMoreExchanges"
+        :onNextPage="getMorePapers"
         :isFetching="isFetchingMoreData"
         :page="currentPage"
       />
@@ -27,30 +27,30 @@
     },
     data() {
       return {
-        searchedExchangeTitle: ""
+        searchedPaperTitle: ""
       }
     },
     computed: {
-      exchanges() {
+      papers() {
         console.log();
-        return this.$store.getters["exchange/filterExchanges"](this.searchedExchangeTitle);
+        return this.$store.getters["paper/filterPapers"](this.searchedPaperTitle);
       },
       isFetchingMoreData() {
-        return this.$store.state.exchange.pagination.isFetchingData
+        return this.$store.state.paper.pagination.isFetchingData
       },
       currentPage() {
-        return this.$store.getters["exchange/currentPage"];
+        return this.$store.getters["paper/currentPage"];
       }
     },
     created() {
-      this.$store.dispatch("exchange/getExchanges");
+      this.$store.dispatch("paper/getPapers");
     },
     methods: {
-      getMoreExchanges({page}) {
-        this.$store.dispatch("exchange/getMoreExchanges", {page});
+      getMorePapers({page}) {
+        this.$store.dispatch("paper/getMorePapers", {page});
       },
-      filterExchanges(searchValue) {
-        this.searchedExchangeTitle = searchValue;
+      filterPapers(searchValue) {
+        this.searchedPaperTitle = searchValue;
       }
     }
   }
