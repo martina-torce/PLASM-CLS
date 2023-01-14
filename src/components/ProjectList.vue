@@ -43,18 +43,18 @@ export default {
     margin-bottom: 10px;
     font-weight: bold;
   }
-    .add-project-button {
-      right: 75px;
-      top: 100px;
-      position: absolute;
-      z-index: 999;
-      background-color:hsl(0deg, 0%, 29%);
-      border: none;
-      padding: 10px 22px;
-      border-radius: 12px;
-      text-align: center;
-      display: inline-block;
-      font-size: 16px;
-    }
+  .add-project-button {
+    right: 75px;
+    top: 100px;
+    position: absolute;
+    z-index: 999;
+    background-color:hsl(0deg, 0%, 29%);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+  }
   </style>
   
