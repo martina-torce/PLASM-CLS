@@ -1,3 +1,4 @@
+<!-- start of reference template - https://github.com/Jerga99/exchangario-->
 <!-- This page allows the user to register -->
 <template>
   <div class="page-wrapper">
@@ -132,3 +133,4 @@ export default {
     margin-top: 1rem;
   }
 </style>
+<!-- end of reference -->

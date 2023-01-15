@@ -1,3 +1,4 @@
+// start of reference template - https://github.com/Jerga99/exchangario
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./router";
@@ -26,3 +27,4 @@ store.dispatch("user/onAuthChange", () => {
     app.mount('#app')
   }
 });
+// end of reference

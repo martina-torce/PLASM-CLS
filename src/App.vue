@@ -1,16 +1,16 @@
-
 <template>
   <div>
     <navigation-bar
       :title="brandName"
       :items="menuItems"
     />
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
+
 export default {
   name: 'App',
   components: {
@@ -32,3 +32,4 @@ export default {
   @import '~bulma/bulma.sass';
   @import 'assets/styles/main.scss';
 </style>
+<!-- end of reference -->

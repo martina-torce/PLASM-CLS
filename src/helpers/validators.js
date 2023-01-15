@@ -1,4 +1,4 @@
-
+// start of reference template - https://github.com/Jerga99/exchangario
 import { helpers } from "@vuelidate/validators";
 
 export const supportedFileType = (value) => {
@@ -10,3 +10,4 @@ export const supportedFileType = (value) => {
   const extension = value.split(".").pop();
   return allowedFormats.includes(extension);
 }
+// end of reference
