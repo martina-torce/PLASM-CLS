@@ -91,24 +91,41 @@ export default {
         where("user", "==", docRef)
       );
       const querySnap = await getDocs(projQuery);
+      const projects = querySnap.docs.map(
+        doc => ({...doc.data(), id: doc.id})
+      );
+      console.log(user.uid);
+      debugger
+       const exprojQuery = query(
+        collection(db, "projects"),
+        where("users", "array-contains", user.uid)
+      );
+      const exquerySnap = await getDocs(exprojQuery);
+      const exprojects = exquerySnap.docs.map(
+        doc => ({id: doc.id, ...doc.data()})
+      );
+      console.log(exprojects);
+      debugger
+
+
+
       const papQuery = query(
         collection(db,"papers"),
         where("user","==",docRef)
       );
       const papSnap = await getDocs(papQuery);
-      const projects = querySnap.docs.map(
-        doc => ({...doc.data(), id: doc.id})
-      );
-      
       const papers = papSnap.docs.map(
         doc=> ({...doc.data(),id:doc.id})
       );
+      
+      
       const useWithProfile = {
         id: user.uid,
         email: user.email,
         ...userProfile,
         projects:projects,
         papers:papers,
+        exprojects:exprojects,
       }
       // end of own code
       commit("setUser", useWithProfile);
