@@ -103,7 +103,6 @@ export default {
       const papers = papSnap.docs.map(
         doc=> ({...doc.data(),id:doc.id})
       );
-
       const useWithProfile = {
         id: user.uid,
         email: user.email,
@@ -124,6 +123,7 @@ export default {
           id: user.uid,
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
+          email: email,
           projects: [],
           papers:[]
         })
@@ -134,6 +134,7 @@ export default {
         commit("setAuthIsProcessing", false);
       }
     },
+
     async login({commit, dispatch}, {email, password}) {
       commit("setAuthIsProcessing", true);
       commit("setAuthError", "");
@@ -171,7 +172,9 @@ export default {
     },
     updateProfile(state, profile) {
       state.data = {...state.data, ...profile};
+    },
+    updateCredit(state, credit) {
+      state.data.credit += credit;
     }
   }
 }
-// end of reference
