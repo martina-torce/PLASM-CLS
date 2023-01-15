@@ -23,8 +23,7 @@
         <paperadd-modal
       v-if="user"
       :user ="user"
-
-    />  <!-- <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link> -->
+      />  <!-- <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link> -->
 
     <citation-modal
         v-if="user"
@@ -162,19 +161,6 @@ export default {
         }
       }
     } 
-    .add-paper-button {
-      right: 75px;
-      top: 100px;
-      position: absolute;
-      z-index: 999;
-      background-color:hsl(0deg, 0%, 29%);
-      border: none;
-      padding: 10px 22px;
-      border-radius: 12px;
-      text-align: center;
-      display: inline-block;
-      font-size: 16px;
-    }
 
     .modal-overlay {
     position: fixed;

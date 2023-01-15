@@ -130,7 +130,8 @@ export default {
 
       dispatch("toast/success", "Paper was created succesfuly!", {root: true});
       onSuccess();
-    }
+    },
+    
   },
   mutations: {
     setPapers(state, papers) {
