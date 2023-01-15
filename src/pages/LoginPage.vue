@@ -40,11 +40,6 @@
             </button>
           </form>
         </div>
-        <p class="has-text-grey">
-          <a href="#">Sign In With Google</a>&nbsp;
-          <a href="#">Sign Up</a> &nbsp;·&nbsp;
-          <a href="#">Need Help?</a>
-        </p>
       </div>
     </div>
   </div>
