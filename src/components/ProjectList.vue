@@ -31,10 +31,6 @@
 <script>
 export default {
   props: {
-    projects: {
-      type: Array,
-      required: true,
-    },
     myProjects:{
       type: Array,
       required: true

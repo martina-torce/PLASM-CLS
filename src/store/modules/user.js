@@ -83,21 +83,31 @@ export default {
       const docSnap = await getDoc(docRef);
       const userProfile = docSnap.data();
 
-      const docQuery = query(
+      const projQuery = query(
         collection(db, "projects"),
         where("user", "==", docRef)
       );
-
-      const querySnap = await getDocs(docQuery);
+      const querySnap = await getDocs(projQuery);
+      const papQuery = query(
+        collection(db,"papers"),
+        where("user","==",docRef)
+      );
+      const papSnap = await getDocs(papQuery);
       const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
+      );
+      
+      
+      const papers = papSnap.docs.map(
+        doc=> ({...doc.data(),id:doc.id})
       );
 
       const useWithProfile = {
         id: user.uid,
         email: user.email,
         ...userProfile,
-        projects
+        projects:projects,
+        papers:papers,
       }
 
       commit("setUser", useWithProfile);
@@ -113,7 +123,8 @@ export default {
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
           credit: 0,
-          projects: []
+          projects: [],
+          papers:[]
         })
       } catch(e) {
         commit("setAuthError", e.message);

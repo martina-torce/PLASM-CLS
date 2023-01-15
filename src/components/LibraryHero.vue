@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    
+
         <paperadd-modal
       v-if="user"
       :user ="user"
@@ -29,7 +29,7 @@
     <citation-modal
         v-if="user"
         :user="user"
-        :papers="papers"
+
       />
   </div>
 </template>

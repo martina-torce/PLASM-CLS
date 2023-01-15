@@ -5,7 +5,8 @@
         :onSearch="filterPapers"
       />
       <library-list
-        :papers="papers"
+
+        :myPapers="userPapers"
       />
       <library-pagination
         :onNextPage="getMorePapers"
@@ -32,16 +33,25 @@
       }
     },
     computed: {
-      papers() {
+      /* papers() {
         console.log();
         return this.$store.getters["paper/filterPapers"](this.searchedPaperTitle);
+      }, */
+      user(){
+        return this.$store.state.user.data;
+      },
+      paper(){
+        return this.$store.state.project.item;
       },
       isFetchingMoreData() {
         return this.$store.state.paper.pagination.isFetchingData
       },
       currentPage() {
         return this.$store.getters["paper/currentPage"];
-      }
+      },
+      userPapers() {
+        return this.user?.papers|| [];
+      },
     },
     created() {
       this.$store.dispatch("paper/getPapers");

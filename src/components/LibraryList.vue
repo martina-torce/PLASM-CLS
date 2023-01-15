@@ -6,7 +6,7 @@
       <div class="row is-multiline">
         <!-- Loops inside the papers from the paper database  -->
         <div
-          v-for="paper in papers"
+          v-for="paper in myPapers"
           :key="paper.id"
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
@@ -33,7 +33,7 @@
             </router-link>
             <!-- Display the date the paper was added -->
             <div class="level-right">
-                {{paper.createdAt.toDate().toDateString()}}
+               <!--  {{paper.createdAt.toDate().toDateString()}} -->
             </div>
           </div>
         </div>
@@ -45,9 +45,9 @@
 <script>
 export default {
   props: {
-    papers: {
-      type: Array,
-      required: true,
+    myPapers:{
+      type:Array,
+      required:true,
     }
   }
 }

@@ -229,11 +229,11 @@
         user: {
           type: Object,
           required: true
-        },
+        }/* ,
         project:{
             type: Object,
             required: true
-        }
+        } */
       },
       validations(){
         return {
