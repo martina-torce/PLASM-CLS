@@ -190,7 +190,7 @@
           </div>
   
               <template #activator>
-              <button class="round-button export-button" style="color: white">
+              <button class="round-button add-paper-button" style="color: white">
                   Add Paper
               </button>
               </template>
@@ -331,11 +331,11 @@
   
   <style scoped>
   
-    .export-button {
-        right: 510px;
+    .add-paper-button {
+        right: 375px;
         top: 100px;
         position: absolute;
-        z-index: 999;
+        z-index: 2;
         background-color:hsl(0deg, 0%, 29%);
         border: none;
         padding: 10px 22px;
