@@ -19,25 +19,25 @@ export default {
     async getComments({commit}, ref){
       commit("setComments", []);
       const docRef = ref;
+      debugger
       const commentQuery = query(
         collection(db,"usercomments"),
         where("paper", "==", docRef)
       );
+      debugger
       const querySnap = await getDocs(commentQuery);
       const comments = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
 
       commit("setComments",comments)
-
-
     },
     
     async createComment({rootState, dispatch}, { data, onSuccess }) {
         const userRef = doc(db, "users", rootState.user.data.id);
+        const usernameRef = doc(db, "users", rootState.user.data.username);
         data.user = userRef;
-
-        console.log(userRef)
+        data.userUsername = usernameRef;
        
         await addDoc(collection(db, "usercomments"), data);
   

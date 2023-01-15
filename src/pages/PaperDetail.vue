@@ -62,7 +62,10 @@
         Comments
       </div>
       <div v-for="comment in commentsForPaper" :key="comment.id" class="comment">
-      {{ comment.NewComment }} by
+        {{ comment.NewComment }}
+      <div class="level-right">
+        Created by {{ comment.userUsername.id }}
+      </div>
     </div>
   </div>
       <div class="page-wrapper">
@@ -138,9 +141,6 @@ export default {
     },
     userPapers() {
       return this.user?.papers || [];
-    },
-    isPaperOwner() {
-      return this.$store.getters["user/isPaperOwner"](this.paperUser.id);
     },
     canCreatePaper() {
       return this.isAuth && !this.isPaperOwner
