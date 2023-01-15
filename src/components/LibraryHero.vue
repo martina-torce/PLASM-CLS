@@ -28,8 +28,10 @@
     <citation-modal
         v-if="user"
         :user="user"
- 
-
+      />
+      <citation-modall
+        v-if="user"
+        :user="user"
       />
   </div>
 </template>
@@ -37,12 +39,14 @@
 <script>
 import useAuth from '../composition/useAuth';
 import CitationModal from '../components/CitationModal.vue'
+import CitationModall from '../components/CitationModal2.vue'
 import PaperaddModal from '../components/PaperAddModal.vue'
 
 
 export default {
   components: {
     CitationModal,
+    CitationModall,
     PaperaddModal,
   },
   props: {

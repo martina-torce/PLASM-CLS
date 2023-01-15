@@ -10,21 +10,21 @@
                 :key="paper.id"
                 class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
                     <pre>
-                      @{{paper.type}}{ {{paper.citationkey}},
-                          author    = "{{ paper.author }}",
-                          title     = "{{ paper.title }}",
-                          journal   = "{{ paper.journal }}",
-                          year      =  {{ paper.year }},
-                          DOI       = {{ paper.doi }},
-                          url       = {{ paper.url }},
-                      }
+@{{paper.type}}{ {{paper.citationkey}},
+    author    = "{{ paper.author }}",
+    title     = "{{ paper.title }}",
+    journal   = "{{ paper.journal }}",
+    year      =  {{ paper.year }},
+    DOI       = {{ paper.doi }},
+    url       = {{ paper.url }},
+}
                     </pre>
                 </div>
             </div>
         </div>
         <template #activator>
         <button class="round-button export-button" style="color: white">
-            Export Citation
+            Export BibTeX
         </button>
         </template>
   </citation-modal>
