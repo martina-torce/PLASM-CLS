@@ -58,31 +58,74 @@
       </div>
     </div>
     <div class="container">
-      <div class="comment-space">
-        <p>Comment (1)</p>
+      <div class="title">
+        Comments
       </div>
-      <div>
-        <user-comment class="message" />
+      <div v-for="comment in commentsForPaper" :key="comment.id" class="comment">
+        {{ comment.NewComment }}
+      <div class="level-right">
+        Created by {{ comment.userUsername.id }}
       </div>
-      <add-comment />
     </div>
   </div>
+      <div class="page-wrapper">
+    <div class="container">
+      <div class="form-container">
+        <form>
+          <div class="field">
+            <label class="label">NewComment</label>
+            <div class="control">
+              <input
+                v-model="form.NewComment"
+                class="input"
+                type="text"
+                placeholder="input new comments"
+              />
+              <form-errors :errors="v$.form.NewComment.$errors" />
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button
+                type="button"
+                @click="createComment"
+                class="button is-link">Submit</button>
+            </div>
+            <div class="control">
+              <router-link to="/projects" class="button is-text">Cancel</router-link>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+
 </template>
 
 
 <script>
-import AddComment from "../components/AddComment.vue";
-import UserComment from "../components/UserComment.vue"
+import useVuelidate from '@vuelidate/core'
+import { required, helpers } from '@vuelidate/validators'
+import FormErrors from "../components/FormErrors.vue";
+
+const setupInitialData = () => ({
+  NewComment: "",
+})
+
 
 export default {
   components: {
-    AddComment,
-    UserComment
+    FormErrors
   },
+
   created() {
     const { slug } = this.$route.params;
     this.$store.dispatch("paper/getPapersBySlug", slug);
+    this.form.paper = slug
+    this.$store.dispatch("usercomment/getComments", slug);
   },
+
   computed: {
     user() {
       return this.$store.state.user.data;
@@ -99,14 +142,54 @@ export default {
     userPapers() {
       return this.user?.papers || [];
     },
-    isPaperOwner() {
-      return this.$store.getters["user/isPaperOwner"](this.paperUser.id);
-    },
     canCreatePaper() {
       return this.isAuth && !this.isPaperOwner
+    },
+    commentsForPaper(){
+      return this.$store.state.usercomment.items;
+    },
+    
+  },
+
+
+  data() {
+    return {
+      form: setupInitialData()
     }
+  },
+
+  // helps ensure the fields are entered correctly
+  validations() {
+    return {
+      form: {
+        NewComment: {
+          required: helpers.withMessage("cannot upload empty comment!", required),
+        },
+      }
+    }
+  },
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  // if the fields are entered correctly it dispatches project information to store and reset fields
+  methods: {
+    async createComment() {
+      const isValid = await this.v$.$validate();
+
+      if (isValid) {
+        this.v$.$reset();
+        this.$store.dispatch("usercomment/createComment", {
+          data: this.form,
+          onSuccess: () => {
+            this.form = setupInitialData();}
+          }
+        )
+      }
+    },
   }
 }
+
+
 </script>
 
 <style scoped lang="scss">
@@ -179,5 +262,10 @@ export default {
         font-size: 17px;
       }
     }
+  }
+
+  .comment {
+    margin: 1em 0 2em;
+    border-bottom: 1px solid #ccc;
   }
 </style>
