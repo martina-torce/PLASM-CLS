@@ -11,7 +11,7 @@
           class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
             <!-- Loops inside the tags from papers and display them -->
-            <div class="item-tags padder">
+            <div class="item-tags">
               <a
                 v-for="tag in paper.tags"
                 :key="tag"
@@ -28,9 +28,13 @@
               <!-- Display the paper title -->
               <h2
                 class="title item-title is-size-4 has-text-weight-extra-bold">
-                <a class="item-link padder" href="#">{{paper.title}}</a>
+                <a class="item-link" href="#">{{paper.title}}</a>
               </h2>
             </router-link>
+            <!-- Display the date the paper was added -->
+            <div class="level-right">
+                {{paper.createdAt.toDate().toDateString()}}
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +43,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     papers: {
@@ -58,9 +61,5 @@ export default {
     font-size: 34px;
     margin-bottom: 10px;
     font-weight: bold;
-  }
-
-  .padder {
-    padding: 15px;
   }
 </style>

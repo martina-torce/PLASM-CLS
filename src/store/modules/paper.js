@@ -119,6 +119,8 @@ export default {
     },
     async createPaper({rootState, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", rootState.user.data.id);
+      console.log(rootState.project)
+      debugger
       data.user = userRef;
       data.slug = slugify(`${data.title} ${Date.now()}`, {
         lower: true,

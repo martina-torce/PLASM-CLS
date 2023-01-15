@@ -92,7 +92,6 @@ export default {
       const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
-      debugger
 
       const useWithProfile = {
         id: user.uid,

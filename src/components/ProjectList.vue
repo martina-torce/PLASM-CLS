@@ -18,7 +18,7 @@
               class="item-link"
             >  
             <h2
-                class="title item-title is-size-4 has-text-weight-extra-bold padder">
+                class="title item-title is-size-4 has-text-weight-extra-bold">
                 <a class="item-link" href="#">{{project.title}}</a>
               </h2>
             </router-link>
@@ -64,9 +64,6 @@ export default {
     text-align: center;
     display: inline-block;
     font-size: 16px;
-  }
-  .padder {
-    padding: 15px;
   }
   </style>
   

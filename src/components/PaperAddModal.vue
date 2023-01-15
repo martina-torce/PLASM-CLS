@@ -1,7 +1,11 @@
 <template>
-  <div class="page-wrapper">
-    <div class="container">
-      <div class="form-container">
+    <paperadd-modal
+      ref="citationModal"
+    >
+      <div class="container">
+          <div class="posts-type">Citation List</div>
+              <div class="row is-multiline">
+                <div class="form-container">
         <form>
           <div class="field">
             <label class="label">Type*</label>
@@ -177,112 +181,181 @@
                 class="button is-link">Submit</button>
             </div>
             <div class="control">
-              <router-link to="/library" class="button is-text">Cancel</router-link>
+              <!-- <router-link to="/library" class="button is-text">Cancel</router-link> -->
             </div>
           </div>
         </form>
       </div>
-    </div>
-  </div>
-</template>
+              </div>
+          </div>
+  
+              <template #activator>
+              <button class="round-button export-button" style="color: white">
+                  Add Paper
+              </button>
+              </template>
+  
+    </paperadd-modal>
+  </template>
+  
+  <script>
 
-<script>
-import useVuelidate from '@vuelidate/core'
-import { required, helpers } from '@vuelidate/validators'
-import FormErrors from "../components/FormErrors.vue";
-
-const setupInitialData = () => ({
-  type: "book",
-  title: "",
-  author: "",
-  year: "",
-  citationkey: "",
-  booktitle: "",
-  journal: "",
-  doi: "",
-  pages: "",
-  url: "",
-  date: "",
-  description: "",
-  tags: []
-})
-
-export default {
-  components: {
-    FormErrors
-  },
-  data() {
-    return {
-      form: setupInitialData()
-    }
-  },
-  validations() {
-    return {
-      form: {
-        type: {
-          required: helpers.withMessage("Type cannot by empty!", required),
-        },
-        title: {
-          required: helpers.withMessage("Title cannot by empty!", required),
-        },
-        author: { required },
-        year: { required },
-        citationkey: { required },
-        booktitle: {required: false },
-        journal: {required: false },
-        doi: {required: false },
-        pages: {required: false },
-        url: {required: false },
-        date: {required: false },
-        description: {required: false },
-      }
-    }
-  },
-  setup () {
-    return { v$: useVuelidate() }
-  },
-  methods: {
-    async createPaper() {
-      const isValid = await this.v$.$validate();
-
-      if (isValid) {
-        this.v$.$reset();
-        this.$store.dispatch("paper/createPaper", {
-          data: this.form,
-          onSuccess: () => {
-            this.form = setupInitialData();
-          }
+    import PaperaddModal from "./PaperAddModalComponent.vue";
+    import useVuelidate from '@vuelidate/core'
+    import { required, helpers } from '@vuelidate/validators'
+    import FormErrors from "../components/FormErrors.vue";
+    const setupInitialData = () => ({
+        type: "book",
+        title: "",
+        author: "",
+        year: "",
+        citationkey: "",
+        booktitle: "",
+        journal: "",
+        doi: "",
+        pages: "",
+        url: "",
+        date: "",
+        description: "",
+        tags: [],
+        
         })
-      }
-    },
-    handleTags(event) {
-      const { value } = event.target;
-
-      if (
-        value &&
-        value.trim().length > 1 &&
-        (value.substr(-1) === "," || value.substr(-1) === " ")) {
-
-        const _value = value.split(",")[0].trim();
-
-        if (!this.form.tags.includes(_value)) {
-          this.form.tags.push(_value);
+    export default {
+      components: {
+        PaperaddModal,
+        FormErrors
+      },
+      props: {
+        user: {
+          type: Object,
+          required: true
+        },
+        project:{
+            type: Object,
+            required: true
         }
-
-        event.target.value = "";
+      },
+      validations(){
+        return {
+            form: {
+                type: {
+                required: helpers.withMessage("Type cannot by empty!", required),
+                },
+                title: {
+                required: helpers.withMessage("Title cannot by empty!", required),
+                },
+                author: { required },
+                year: { required },
+                citationkey: { required },
+                booktitle: {required: false },
+                journal: {required: false },
+                doi: {required: false },
+                pages: {required: false },
+                url: {required: false },
+                date: {required: false },
+                description: {required: false },
+                
       }
     }
-  }
-}
-</script>
+      },
+      setup(){
+        return { v$: useVuelidate() }
+      },
+      data () {
+        return {
+            form: setupInitialData(),
+            
+          userProfile: { ...this.user },
+          progress: 0,
+          searchedPaperTitle: "",
+          projectRef: {...this.$route.params.slug}
+        }
+      },
+      computed: {
+        modal() {
+          return this.$refs.paperaddModal
+        },
+        papers() {
+          console.log();
+          return this.$store.getters["paper/filterPapers"](this.searchedPaperTitle);
+        },
+        isFetchingMoreData() {
+          return this.$store.state.paper.pagination.isFetchingData
+        },
+        currentPage() {
+          return this.$store.getters["paper/currentPage"];
+        }
+      },
 
-<style scoped>
-.form-container {
-  max-width: 960px;
-  margin: 0 auto;
-  margin-top: 40px;
-}
-.tag {
-  margin: 3px;
-}
-</style>
+      methods: {
+        async createPaper() {
+            const isValid = await this.v$.$validate();
+
+            if (isValid) {
+                this.v$.$reset();
+                this.$store.dispatch("paper/createPaper", {
+                data: this.form,
+                onSuccess: () => {
+                    this.form = setupInitialData();
+                    
+                }
+                })
+            }
+        },
+        getMorePapers({page}) {
+          this.$store.dispatch("paper/getMorePapers", {page});
+        },
+        filterPapers(searchValue) {
+          this.searchedPaperTitle = searchValue;
+        },
+        handleTags(event) {
+            const { value } = event.target;
+
+            if (
+                value &&
+                value.trim().length > 1 &&
+                (value.substr(-1) === "," || value.substr(-1) === " ")) {
+
+                const _value = value.split(",")[0].trim();
+
+                if (!this.form.tags.includes(_value)) {
+                this.form.tags.push(_value);
+                }
+
+                event.target.value = "";
+            }
+            }
+      }
+    }
+  </script>
+  
+  <style scoped>
+  
+    .export-button {
+        right: 510px;
+        top: 100px;
+        position: absolute;
+        z-index: 999;
+        background-color:hsl(0deg, 0%, 29%);
+        border: none;
+        padding: 10px 22px;
+        border-radius: 12px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+      }
+    .form-container {
+        max-width: 960px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+    .tag {
+        margin: 3px;
+    }
+    .posts-type {
+      font-size: 34px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  
+  </style>
