@@ -121,7 +121,7 @@ export default {
           id: user.uid,
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
-          credit: 0,
+          email: email,
           projects: [],
           papers:[]
         })
