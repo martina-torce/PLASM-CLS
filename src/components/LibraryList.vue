@@ -32,9 +32,12 @@
               </h2>
             </router-link>
             <!-- Display the date the paper was added -->
-              <div class="level-right">
-                By  {{paper.author }}
-              </div>
+            <div class="level-left">
+               Author :  {{ paper.author }}
+            </div>
+            <div class="level-right">
+                {{paper.createdAt.toDate().toDateString() }}
+            </div>
           </div>
         </div>
       </div>

@@ -118,8 +118,17 @@ export default {
       commit("setPaginationHistory", snapshot.docs[0]);
     },
     async createPaper({rootState, dispatch}, { data, onSuccess }) {
-      const userRef = doc(db, "users", rootState.user.data.id); 
+      const userRef = doc(db, "users", rootState.user.data.id);
       data.user = userRef;
+      let pathname = window.location.pathname;
+      let pathnameArray = pathname.split('/');
+      let secondPart = pathnameArray[2];
+      const projectQuery = query(
+        collection(db,"projects"),
+        where("project","==",secondPart)
+      );
+      const projectSnap = await getDocs(projectQuery);
+      data.project = projectSnap.docs.map(doc => ({id: doc.id}));
       data.slug = slugify(`${data.title} ${Date.now()}`, {
         lower: true,
         strict: true
