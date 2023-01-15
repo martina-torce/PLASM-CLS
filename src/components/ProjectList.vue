@@ -6,7 +6,7 @@
   <!-- Create the List of projects from the project database in Firestore  -->
   <section class="list">
     <div class="container">
-      <div class="list-type">Projects :</div>
+      <div class="list-type">Owned Projects:</div>
       <div class="row is-multiline">
         <div
           v-for="project in myProjects"
@@ -25,6 +25,29 @@
           </div>
         </div>
       </div>
+      <div class="list-type">Projects I am a member of:</div>
+      <div class="row is-multiline">
+        <div
+          v-for="exproject in memberProjects"
+          :key="exproject.id"
+          class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
+          <div class="item post-card bottom-border">
+            <router-link
+              :to="{name: 'ProjectLibrary', params: {slug: exproject.slug}}"
+              class="item-link"
+            >  
+            <h2
+                class="title item-title is-size-4 has-text-weight-extra-bold">
+                <a class="item-link" href="#">{{exproject.title}}</a>
+              </h2>
+            </router-link>
+          </div>
+        </div>
+      </div>
+
+
+
+
     </div>
   </section>
 </template>
@@ -35,7 +58,12 @@ export default {
     myProjects:{
       type: Array,
       required: true
-    }
+    },
+    memberProjects:{
+      type: Array,
+      required: true
+    },
+
   }
 }
 </script>

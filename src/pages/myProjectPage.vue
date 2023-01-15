@@ -3,6 +3,7 @@
     <div id="PLasm-CLS">
       <project-list
         :myProjects = "userProjects"
+        :memberProjects = "exUserProjects"
       />
       <project-pagination
         :onNextPage="getMoreProjects"
@@ -34,11 +35,17 @@
       project(){
         return this.$store.state.project.item;
       },
+      exproject(){
+        return this.$store.state.exproject.item;
+      },
       projectMembers(){
         return this.project.user;
       },
       userProjects() {
         return this.user?.projects|| [];
+      },
+      exUserProjects(){
+        return this.user?.exprojects||[];
       },
       isFetchingMoreData() {
         return this.$store.state.project.pagination.isFetchingData
