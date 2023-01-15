@@ -47,7 +47,7 @@ export default {
   props: {
     myPapers:{
       type:Array,
-      required:true,
+      required:false,
     }
   }
 }

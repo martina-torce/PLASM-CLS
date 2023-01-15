@@ -29,6 +29,7 @@
     <citation-modal
         v-if="user"
         :user="user"
+ 
 
       />
   </div>
