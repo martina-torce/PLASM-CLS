@@ -1,4 +1,4 @@
-
+<!-- start of reference template - https://github.com/Jerga99/exchangario (with edits) -->
 <template>
   <!-- The Navigation bar at the top of the screen -->
   <header class="header">
@@ -138,6 +138,6 @@ export default {
       }
     }
   }
-  
 }
 </script>
+<!-- end of reference -->
