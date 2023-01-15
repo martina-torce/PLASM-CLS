@@ -1,4 +1,4 @@
-
+// start of reference template - https://github.com/Jerga99/exchangario
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
@@ -13,3 +13,4 @@ export default {
     }
   }
 }
+// end of reference

@@ -1,4 +1,4 @@
-
+// start of reference template - https://github.com/Jerga99/exchangario
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -25,6 +25,7 @@ export default {
     isAuthenticated(state) {
       return !!state.data;
     },
+    // start of own code
     isPaperOwner: state => paperUserId => (
       state.data &&
       paperUserId &&
@@ -34,7 +35,8 @@ export default {
       state.data&&
       projectUserId &&
       state.data.id === projectUserId
-    )
+    ) 
+    // end of own code
   },
   actions: {
     async uploadImage(_, { bytes, name, onSuccess, onProgress}) {
@@ -92,6 +94,7 @@ export default {
       const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
+      debugger
 
       const useWithProfile = {
         id: user.uid,
@@ -112,7 +115,6 @@ export default {
           id: user.uid,
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
-          credit: 0,
           projects: []
         })
       } catch(e) {
@@ -159,9 +161,7 @@ export default {
     },
     updateProfile(state, profile) {
       state.data = {...state.data, ...profile};
-    },
-    updateCredit(state, credit) {
-      state.data.credit += credit;
     }
   }
 }
+// end of reference

@@ -1,5 +1,4 @@
-
-
+// start of reference template - https://github.com/Jerga99/exchangario
 import { useStore } from "vuex";
 import { computed } from "vue";
 
@@ -19,3 +18,4 @@ export default function useAuth() {
     user
   }
 }
+// end of reference
