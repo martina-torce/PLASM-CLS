@@ -7,6 +7,7 @@ import user from "./modules/user";
 import toast from "./modules/toast";
 import paper from "./modules/paper";
 import project from "./modules/project";
+import usercomment from "./modules/usercomment"
 
 export default createStore({
   modules: {
@@ -15,6 +16,7 @@ export default createStore({
     toast,
    // opportunity,
     paper,
-    project
+    project,
+    usercomment
   }
 })
