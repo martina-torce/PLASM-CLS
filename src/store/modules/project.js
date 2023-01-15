@@ -137,14 +137,16 @@ export default {
         strict: true
       })
       data.createdAt = Timestamp.fromDate(new Date());
+      console.log(data.invitedUsers)
+      debugger
       const userQuery = query(
-        collection(db,"user"),
+        collection(db,"users"),
         where("email","==",data.invitedUsers)
       );
       debugger
       const userSnap = await getDocs(userQuery);
       debugger
-      data.users = userSnap.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      data.users = userSnap.docs.map(doc => ({id: doc.id}));
       
       debugger
       await addDoc(collection(db, "projects"), data);
