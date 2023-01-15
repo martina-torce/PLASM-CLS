@@ -25,6 +25,7 @@ export default {
     isAuthenticated(state) {
       return !!state.data;
     },
+    // start of own code
     isPaperOwner: state => paperUserId => (
       state.data &&
       paperUserId &&
@@ -35,6 +36,7 @@ export default {
       projectUserId &&
       state.data.id === projectUserId
     )
+    // end of own code
   },
   actions: {
     async uploadImage(_, { bytes, name, onSuccess, onProgress}) {
@@ -109,7 +111,6 @@ export default {
         projects:projects,
         papers:papers,
       }
-
       // end of own code
       commit("setUser", useWithProfile);
     },
