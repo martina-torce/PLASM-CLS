@@ -62,6 +62,9 @@ export default {
       paper.user.id = userSnap.id;
       commit("setPaper", paper);
     },
+    
+    
+
     async getMorePapers({commit, state}, {page}) {
       let queryData;
 
@@ -117,6 +120,7 @@ export default {
       commit("setLastItem", snapshot.docs[snapshot.docs.length - 1]);
       commit("setPaginationHistory", snapshot.docs[0]);
     },
+
     async createPaper({rootState, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", rootState.user.data.id); 
       data.user = userRef;
@@ -151,6 +155,6 @@ export default {
     },
     resetPagination(state) {
       state.pagination = initPagination();
-    }
-  }
+    },
+}
 }
