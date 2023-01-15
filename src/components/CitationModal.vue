@@ -6,7 +6,7 @@
         <div class="posts-type">Citation List</div>
             <div class="row is-multiline">
                 <div
-                v-for="paper in papers"
+                v-for="paper in userPapers"
                 :key="paper.id"
                 class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
                     <pre>
@@ -64,7 +64,11 @@
       },
       currentPage() {
         return this.$store.getters["paper/currentPage"];
+      },
+      userPapers(){
+        return this.user?.papers|| [];
       }
+
     },
     created() {
       this.$store.dispatch("paper/getPapers");

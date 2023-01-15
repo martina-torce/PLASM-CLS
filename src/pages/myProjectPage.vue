@@ -2,7 +2,6 @@
 <template>
     <div id="PLasm-CLS">
       <project-list
-        :projects="projects"
         :myProjects = "userProjects"
       />
       <project-pagination

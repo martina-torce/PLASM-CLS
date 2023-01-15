@@ -19,8 +19,8 @@
         </div>
       </div>
     </div>
-    
-    <paperadd-modal
+
+        <paperadd-modal
       v-if="user"
       :user ="user"
       />  <!-- <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link> -->
@@ -28,7 +28,8 @@
     <citation-modal
         v-if="user"
         :user="user"
-        :papers="papers"
+ 
+
       />
   </div>
 </template>

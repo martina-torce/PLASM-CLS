@@ -25,7 +25,6 @@ export default {
     isAuthenticated(state) {
       return !!state.data;
     },
-    // start of own code
     isPaperOwner: state => paperUserId => (
       state.data &&
       paperUserId &&
@@ -35,8 +34,7 @@ export default {
       state.data&&
       projectUserId &&
       state.data.id === projectUserId
-    ) 
-    // end of own code
+    )
   },
   actions: {
     async uploadImage(_, { bytes, name, onSuccess, onProgress}) {
@@ -85,24 +83,34 @@ export default {
       const docSnap = await getDoc(docRef);
       const userProfile = docSnap.data();
 
-      const docQuery = query(
+      // start of own code
+      const projQuery = query(
         collection(db, "projects"),
         where("user", "==", docRef)
       );
-
-      const querySnap = await getDocs(docQuery);
+      const querySnap = await getDocs(projQuery);
+      const papQuery = query(
+        collection(db,"papers"),
+        where("user","==",docRef)
+      );
+      const papSnap = await getDocs(papQuery);
       const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
-      debugger
+      
+      const papers = papSnap.docs.map(
+        doc=> ({...doc.data(),id:doc.id})
+      );
 
       const useWithProfile = {
         id: user.uid,
         email: user.email,
         ...userProfile,
-        projects
+        projects:projects,
+        papers:papers,
       }
 
+      // end of own code
       commit("setUser", useWithProfile);
     },
     async register({commit, dispatch}, {email, password, username}) {
@@ -115,7 +123,8 @@ export default {
           id: user.uid,
           username,
           avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
-          projects: []
+          projects: [],
+          papers:[]
         })
       } catch(e) {
         commit("setAuthError", e.message);

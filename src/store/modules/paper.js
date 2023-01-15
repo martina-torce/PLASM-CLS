@@ -5,7 +5,7 @@ import {
   getDocs, getDoc, doc, addDoc,
   query, where, limit, startAfter, startAt,
   collection,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
 import slugify from "slugify";
 
@@ -118,9 +118,7 @@ export default {
       commit("setPaginationHistory", snapshot.docs[0]);
     },
     async createPaper({rootState, dispatch}, { data, onSuccess }) {
-      const userRef = doc(db, "users", rootState.user.data.id);
-      console.log(rootState.project)
-      debugger
+      const userRef = doc(db, "users", rootState.user.data.id); 
       data.user = userRef;
       data.slug = slugify(`${data.title} ${Date.now()}`, {
         lower: true,
@@ -132,7 +130,8 @@ export default {
 
       dispatch("toast/success", "Paper was created succesfuly!", {root: true});
       onSuccess();
-    }
+    },
+    
   },
   mutations: {
     setPapers(state, papers) {
