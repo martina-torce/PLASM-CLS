@@ -9,6 +9,7 @@
       </div>
     </div>
   </template>
+  
   <style>
   .message {
     margin-bottom: 2em;

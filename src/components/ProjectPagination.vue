@@ -1,4 +1,4 @@
-  <!-- Creating the Project Pagination to divide list of papers into smaller segements/ pages --> 
+<!-- Creating the Project Pagination to divide list of papers into smaller segements/ pages --> 
 <template>
     <nav class="pagination is-rounded  is-centered" role="navigation" aria-label="pagination">
       <ul class="pagination-list">
