@@ -19,9 +19,13 @@
         </div>
       </div>
     </div>
-    <div class="add-paper-button">
-      <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link>
-    </div>
+    
+        <paperadd-modal
+      v-if="user"
+      :user ="user"
+
+    />  <!-- <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link> -->
+
     <citation-modal
         v-if="user"
         :user="user"
@@ -33,10 +37,13 @@
 <script>
 import useAuth from '../composition/useAuth';
 import CitationModal from '../components/CitationModal.vue'
+import PaperaddModal from '../components/PaperAddModal.vue'
+
 
 export default {
   components: {
     CitationModal,
+    PaperaddModal,
   },
   props: {
     onSearch: {
@@ -47,7 +54,8 @@ export default {
   data() {
     return {
       searchedValue: "",
-      showModal: false
+      showExportModal: false,
+      showImportModal:false
     }
   },
   methods: {
