@@ -101,7 +101,6 @@ export default {
       const papers = papSnap.docs.map(
         doc=> ({...doc.data(),id:doc.id})
       );
-
       const useWithProfile = {
         id: user.uid,
         email: user.email,
@@ -133,6 +132,7 @@ export default {
         commit("setAuthIsProcessing", false);
       }
     },
+
     async login({commit, dispatch}, {email, password}) {
       commit("setAuthIsProcessing", true);
       commit("setAuthError", "");
@@ -173,6 +173,7 @@ export default {
     },
     updateCredit(state, credit) {
       state.data.credit += credit;
-    }
+    },
+
   }
 }

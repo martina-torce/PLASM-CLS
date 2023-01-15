@@ -9,13 +9,25 @@ import {
 } from "firebase/firestore";
 import slugify from "slugify";
 
+
 const initPagination = () => ({
   itemCount: 15,
   lastItem: null,
   paginationHistory: [],
   isFetchingData: false
 })
-
+/* const EmailtoUseref = async(invitedUsers)=>{
+  const userQuery = query(
+    collection(db,"users"),
+    where("email","==",invitedUsers)
+  );
+  const querySnap = await getDocs(userQuery);
+    if (querySnap.docs.length === 0) {
+      return null;
+    }
+  const user = querySnap.docs[0].data();
+  return user;
+} */
 export default {
   namespaced: true,
   state() {
@@ -125,13 +137,26 @@ export default {
         strict: true
       })
       data.createdAt = Timestamp.fromDate(new Date());
-
+      const userQuery = query(
+        collection(db,"user"),
+        where("email","==",data.invitedUsers)
+      );
+      debugger
+      const userSnap = await getDocs(userQuery);
+      debugger
+      data.users = userSnap.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      
+      debugger
       await addDoc(collection(db, "projects"), data);
-
+      debugger
       dispatch("toast/success", " New Project was created succesfuly!", {root: true});
       onSuccess();
-    }
+    }, 
+  
+
   },
+
+
   mutations: {
     setProjects(state, projects) {
       state.items = projects;
@@ -150,6 +175,10 @@ export default {
     },
     resetPagination(state) {
       state.pagination = initPagination();
-    }
+    },
+    setUsers(state, users){
+      state.item.users = users;
+    },
+    
   }
 }
