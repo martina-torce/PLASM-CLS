@@ -68,10 +68,3 @@
   }
   </script>
   
-  <style scoped>
-   .counter-container {
-     padding: 200px;
-     font-size: 60px;
-   }
-  </style>
-  

@@ -32,7 +32,7 @@
               </h2>
             </router-link>
             <!-- Display the date the paper was added -->
-              <div class="level-right">
+              <div class="level-left">
                 By  {{paper.author }}
               </div>
           </div>

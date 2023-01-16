@@ -25,11 +25,11 @@
       :user ="user"
       />  <!-- <router-link to="/library/new" class="round-button" style="color: white">Add Paper</router-link> -->
 
-    <citation-modal
+    <citation-modal-bibtex
         v-if="user"
         :user="user"
       />
-      <citation-modall
+      <citation-modal-normal
         v-if="user"
         :user="user"
       />
@@ -38,15 +38,15 @@
 
 <script>
 import useAuth from '../composition/useAuth';
-import CitationModal from '../components/CitationModal.vue'
-import CitationModall from '../components/CitationModal2.vue'
+import CitationModalBibtex from '../components/CitationModal.vue'
+import CitationModalNormal from '../components/CitationModal2.vue'
 import PaperaddModal from '../components/PaperAddModal.vue'
 
 
 export default {
   components: {
-    CitationModal,
-    CitationModall,
+    CitationModalBibtex,
+    CitationModalNormal,
     PaperaddModal,
   },
   props: {

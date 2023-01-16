@@ -1,5 +1,5 @@
 <template>
-    <citation-modall
+    <citation-modal
       ref="citationModall"
     >
       <div class="container">
@@ -20,14 +20,14 @@
               Export Citation
           </button>
           </template>
-    </citation-modall>
+    </citation-modal>
   </template>
   
   <script>
-    import CitationModall from "./CitationModalComponent2.vue";
+    import CitationModal from "./CitationModalComponent.vue";
     export default {
       components: {
-        CitationModall
+        CitationModal
       },
       props: {
         user: {
