@@ -57,6 +57,7 @@
         </div>
       </div>
     </div>
+    <!-- Display the comments of a paper -->
     <div class="container">
       <div class="title">
         Comments
@@ -193,13 +194,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .title {
-      color: gray;
-    }
-    .subtitle {
-      color: gray;
-    }
-  // WHOLE HEADER
+  .title {
+    color: gray;
+  }
   .hero-body {
     position: relative;
   }
@@ -224,11 +221,6 @@ export default {
     font-weight: normals;
     font-size: 25px;
   }
-  .subtitle {
-    /*font-weight: bold;*/
-    font-size: 25px;
-  }
-  // WHOLE HEADER END
   .more-details {
     background-color: #f9f9f9;
     border: 1px solid #dedfe0;
@@ -252,7 +244,6 @@ export default {
       width: 45%;
     }
   }
-  // USERS
   .user-tile {
     display: flex;
     &-author {
@@ -263,7 +254,6 @@ export default {
       }
     }
   }
-
   .comment {
     margin: 1em 0 2em;
     border-bottom: 1px solid #ccc;

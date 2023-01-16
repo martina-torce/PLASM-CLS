@@ -1,3 +1,4 @@
+<!-- First Citation Modal for Bibtex format -->
 <template>
   <citation-modal
     ref="citationModal"
@@ -9,6 +10,7 @@
                 v-for="paper in userPapers"
                 :key="paper.id"
                 class="row is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
+                <!-- Outputs the list of paper int he bibtex format -->
                     <pre>
 @{{paper.type}}{ {{paper.citationkey}},
     author    = "{{ paper.author }}",

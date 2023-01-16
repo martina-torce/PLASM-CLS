@@ -94,8 +94,6 @@ export default {
       const projects = querySnap.docs.map(
         doc => ({...doc.data(), id: doc.id})
       );
-      console.log(user.uid);
-      debugger
        const exprojQuery = query(
         collection(db, "projects"),
         where("users", "array-contains", user.uid)
@@ -105,7 +103,6 @@ export default {
         doc => ({id: doc.id, ...doc.data()})
       );
       console.log(exprojects);
-      debugger
 
 
 

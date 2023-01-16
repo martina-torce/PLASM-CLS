@@ -125,15 +125,5 @@ export default {
     } 
   }
 </script>
-  
-<style scoped>
-.form-container {
-  max-width: 960px;
-  margin: 0 auto;
-  margin-top: 40px;
-}
-.user {
-  margin: 3px;
-}
-</style>
+
   

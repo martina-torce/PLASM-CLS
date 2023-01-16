@@ -5,7 +5,6 @@
         :onSearch="filterPapers"
       />
       <library-list
-
         :myPapers="userPapers"
       />
       <library-pagination
@@ -67,11 +66,4 @@
     }
   }
   </script>
-  
-  <style scoped>
-   .counter-container {
-     padding: 200px;
-     font-size: 60px;
-   }
-  </style>
   

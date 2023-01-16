@@ -1,7 +1,8 @@
-
+<!-- Create the modal for export citation ( For bibtex format and normal citation list ) -->
 <template>
     <div>
       <template v-if="$slots.activator">
+        <!-- when we press open, call open function to show the modal -->
         <div @click="open">
           <slot
             name="activator" />
