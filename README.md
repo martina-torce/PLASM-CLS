@@ -1,24 +1,12 @@
 # PLASM Collaborative Literature Storage
 
-## Project setup
+## The project consist of building a collaborative littearature storage
+## To setup the Project :
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+### To Compiles and hot-reloads for development :
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## The project can be accessible at : https://plasm-cls.herokuapp.com/
